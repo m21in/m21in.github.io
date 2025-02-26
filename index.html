@@ -264,7 +264,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2025-02-26 20:13:17 / 修改时间：21:50:05" itemprop="dateCreated datePublished" datetime="2025-02-26T20:13:17+08:00">2025-02-26</time>
+              <time title="创建时间：2025-02-26 20:13:17 / 修改时间：22:16:53" itemprop="dateCreated datePublished" datetime="2025-02-26T20:13:17+08:00">2025-02-26</time>
             </span>
 
           
@@ -280,8 +280,15 @@
       
           <h1 id="bash内置变量进行RCE"><a href="#bash内置变量进行RCE" class="headerlink" title="bash内置变量进行RCE"></a>bash内置变量进行RCE</h1><p>在刷ctfshow第119题的时候，毫无头绪，后来在网上检索到别的师傅写的，是利用Linux内置的bash变量进行RCE的<br>当时看别的师傅用的payload是这个</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;PWD::<span class="variable">$&#123;#SHLVL&#125;</span>&#125;???<span class="variable">$&#123;PWD::<span class="variable">$&#123;#SHLVL&#125;</span>&#125;</span>?<span class="variable">$&#123;USER:~A&#125;</span>? ????.???</span></span><br></pre></td></tr></table></figure>
-<p>看的有点晕，逐个解析<br>${PWD}在Linux里会显示当前的路径<br>${SHLVL} 通常为1<br>${PWD::$ 是一个特殊变量，表示传递给脚本的参数，如果没有参数直接为0,所以最后表达式会变成<br>?? ??? 匹配任意3个或者2个字符的文件或目录名<br>会匹配到&#x2F;bin&#x2F;dev flag.php</p>
-
+<p>看的有点晕，逐个解析</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
