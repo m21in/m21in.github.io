@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog_head.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog_head.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"m21in.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Task1When visiting the web service using the IP address, what is the domain that we are being redirected to? 访问web服务的时候，被重定向的域是什么？ 浏览器访问目标靶机的IP，发现重定位了地址">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTB-Responder靶机渗透">
+<meta property="og:url" content="http://m21in.github.io/f605f662.html">
+<meta property="og:site_name" content="M21in的博客">
+<meta property="og:description" content="Task1When visiting the web service using the IP address, what is the domain that we are being redirected to? 访问web服务的时候，被重定向的域是什么？ 浏览器访问目标靶机的IP，发现重定位了地址">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260309195619199.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260311143428510.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260311144309486.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260311152011249.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260311222414276.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260311223237262.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260311223425409.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260311234040335.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260318151502617.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260318151546461.png">
+<meta property="article:published_time" content="2026-03-08T11:56:31.000Z">
+<meta property="article:modified_time" content="2026-03-18T09:09:18.395Z">
+<meta property="article:author" content="M21in">
+<meta property="article:tag" content="靶场">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/m21in/picgo/main/20260309195619199.png">
+
+<link rel="canonical" href="http://m21in.github.io/f605f662.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>HTB-Responder靶机渗透 | M21in的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">M21in的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">分享和学习</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">20</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">41</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://m21in.github.io/f605f662.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/blog_head.jpg#/images/avatar.gif">
+      <meta itemprop="name" content="M21in">
+      <meta itemprop="description" content="轻舟已过万重山，前路漫漫亦灿灿">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="M21in的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HTB-Responder靶机渗透
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-03-08 19:56:31" itemprop="dateCreated datePublished" datetime="2026-03-08T19:56:31+08:00">2026-03-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-18 17:09:18" itemprop="dateModified" datetime="2026-03-18T17:09:18+08:00">2026-03-18</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Task1"><a href="#Task1" class="headerlink" title="Task1"></a>Task1</h1><p><code>When visiting the web service using the IP address, what is the domain that we are being redirected to?</code></p>
+<p>访问web服务的时候，被重定向的域是什么？</p>
+<p>浏览器访问目标靶机的IP，发现重定位了地址</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260309195619199.png" alt="image-20260309195612135"></p>
+<p><code>unika.htb</code></p>
+<h1 id="Task2"><a href="#Task2" class="headerlink" title="Task2"></a>Task2</h1><p><code>Which scripting language is being used on the server to generate webpages?</code></p>
+<p>问使用哪种语言生成网页，这里用nmap扫描网页端口就能扫出来</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260311143428510.png" alt="image-20260311143421424"></p>
+<p>扫描出语言是<code>PHP</code></p>
+<h1 id="Task3"><a href="#Task3" class="headerlink" title="Task3"></a>Task3</h1><p><code>What is the name of the URL parameter which is used to load different language versions of the webpage?</code></p>
+<p>问用于加载网页的URL参数名称是什么？</p>
+<p>随便点进一个页面，然后看到网页传参的参数</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260311144309486.png" alt="image-20260311144309376"></p>
+<p><code>page	</code></p>
+<h1 id="Task4"><a href="#Task4" class="headerlink" title="Task4"></a>Task4</h1><p><code>Which of the following values for the </code>page<code> parameter would be an example of exploiting a Local File Include (LFI) vulnerability: &quot;french.html&quot;, &quot;//10.10.14.6/somefile&quot;, &quot;../../../../../../../../windows/system32/drivers/etc/hosts&quot;, &quot;minikatz.exe&quot;</code></p>
+<p>问这三个选项哪个是本地文件包含漏洞的特征，很明显是第三个</p>
+<p><code>../../../../../../../../windows/system32/drivers/etc/hosts</code></p>
+<h1 id="Task5"><a href="#Task5" class="headerlink" title="Task5"></a>Task5</h1><p><code>Which of the following values for the </code>page<code> parameter would be an example of exploiting a Remote File Include (RFI) vulnerability: &quot;french.html&quot;, &quot;//10.10.14.6/somefile&quot;, &quot;../../../../../../../../windows/system32/drivers/etc/hosts&quot;, &quot;minikatz.exe&quot;</code></p>
+<p>这题问的是远程文件包含，就选带IP的</p>
+<p><code>//10.10.14.6/somefile</code></p>
+<h1 id="Task6"><a href="#Task6" class="headerlink" title="Task6"></a>Task6</h1><p><code>What does NTLM stand for?</code></p>
+<p>NTLM代表什么？</p>
+<p><code>New Technology LAN Manager</code></p>
+<h1 id="Task7"><a href="#Task7" class="headerlink" title="Task7"></a>Task7</h1><p><code>Which flag do we use in the Responder utility to specify the network interface?</code></p>
+<p>问Responder程序中使用哪个标志指定网络接口？</p>
+<p>先下载一个Responder工具</p>
+<p><code>sudo apt install respnder -y</code></p>
+<p>这里自带的镜像超时了，所以自行更换了镜像源：</p>
+<p>在&#x2F;etc&#x2F;apt&#x2F;sources.list里面增加</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.aliyun.com/kali kali-rolling main non-free non-free-firmware contrib</span><br><span class="line">deb-src http://mirrors.aliyun.com/kali kali-rolling main non-free non-free-firmware contrib</span><br></pre></td></tr></table></figure>
+
+<p>然后下载完responder工具，直接–help查询</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260311152011249.png" alt="image-20260311152011178"></p>
+<p>找到-i选项是可以指定网络接口的</p>
+<p><code>-I</code></p>
+<h1 id="Task8"><a href="#Task8" class="headerlink" title="Task8"></a>Task8</h1><p><code>There are several tools that take a NetNTLMv2 challenge/response and try millions of passwords to see if any of them generate the same response. One such tool is often referred to as </code>john<code>, but the full name is what?.</code></p>
+<p>问john的全名叫什么？</p>
+<p><code>john the ripper</code></p>
+<h1 id="Task9"><a href="#Task9" class="headerlink" title="Task9"></a>Task9</h1><p><code>What is the password for the administrator user?</code></p>
+<p>问administrator的密码</p>
+<p>这里当时想用wsl做，看到网上很多都是直接用的kali，wsl需要配置一下代理，因为被重定向了，所以要修改&#x2F;etc&#x2F;hosts文件</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260311222414276.png" alt="image-20260311222407224"></p>
+<p>左边写要访问的地址，右边是被重定向的地址，这时候再访问就能直接看到目标靶机的网页内容。然后到网页，因为他有文件包含的漏洞，所以直接进行远程文件包含，同时监听机使用Responder接受反弹</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260311223237262.png" alt="image-20260311223237213"></p>
+<p>此时靶机进行远程文件包含，反弹IP为监听机IP</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260311223425409.png" alt="image-20260311223425325"></p>
+<p>看到反弹回了administrator的密码hash值，然后再用上文的john工具爆破密码</p>
+<p>爆破出来密码是<code>banminton</code></p>
+<h1 id="Task10"><a href="#Task10" class="headerlink" title="Task10"></a>Task10</h1><p><code>We&#39;ll use a Windows service (i.e. running on the box) to remotely access the Responder machine using the password we recovered. What port TCP does it listen on?</code></p>
+<p>问这个监听TCP的端口是什么，拿nmap扫描一下</p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260311234040335.png" alt="image-20260311234040289"></p>
+<p><code>5985</code></p>
+<h1 id="Submit-Root-flag"><a href="#Submit-Root-flag" class="headerlink" title="Submit Root flag"></a>Submit Root flag</h1><p>根据task9里面获得的用户名和密码，直接使用<code>evil-winrm</code>工具连上去，获取flag</p>
+<p><code>evil-winrm -i IP -u administrator -p badminton</code></p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260318151502617.png" alt="image-20260318151455546"></p>
+<p><img src="https://raw.githubusercontent.com/m21in/picgo/main/20260318151546461.png" alt="image-20260318151546407"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="responder"><a href="#responder" class="headerlink" title="responder"></a>responder</h2><p>Responder 是一款可以在局域网模拟各种服务器的内网渗透神器</p>
+<p>这题里面用了Responder的监听</p>
+<p><code>Responder -I tun0</code>在内网中监听tun0网卡</p>
+<h3 id="为什么是tun0？"><a href="#为什么是tun0？" class="headerlink" title="为什么是tun0？"></a>为什么是tun0？</h3><p>因为这是连上的靶机，openvpn上明确指明了是tun0，可以通过<code>ip a</code>命令查看，换成其他的话还是得按实际情况来</p>
+<p>然后在内网中监听，等目标IP发送身份验证（NTLM）响应时，他会伪装成服务器接收他的响应，并弹回hash值</p>
+<h2 id="evil-winrm"><a href="#evil-winrm" class="headerlink" title="evil-winrm"></a>evil-winrm</h2><p>Evil-WinRM是一个开源渗透测试框架，旨在提供一种简单有效的方法来自动执行各种任务并在远程Windows机器上运行复杂的命令。</p>
+<p>这题能用是因为nmap扫描到<code>5985</code>是打开的，而且他跟responder一样支持NTLM认证，所以可以登录系统</p>
+<p>这里靶机的用法是<code>evil-winrm -i IP -u administrator -p password</code>，也可以直接用hash值</p>
+<p><code>evil-winrm -i IP -u administrator -H hash</code>，相当于Linux上的ssh</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%9D%B6%E5%9C%BA/" <i class="fa fa-tag"></i> 靶场</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/7b885753.html" rel="prev" title="HTB-Crocodile靶机渗透">
+      <i class="fa fa-chevron-left"></i> HTB-Crocodile靶机渗透
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/8b7b6e39.html" rel="next" title="HTB-Three靶机渗透">
+      HTB-Three靶机渗透 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+    </div>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Task1"><span class="nav-number">1.</span> <span class="nav-text">Task1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Task2"><span class="nav-number">2.</span> <span class="nav-text">Task2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Task3"><span class="nav-number">3.</span> <span class="nav-text">Task3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Task4"><span class="nav-number">4.</span> <span class="nav-text">Task4</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Task5"><span class="nav-number">5.</span> <span class="nav-text">Task5</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Task6"><span class="nav-number">6.</span> <span class="nav-text">Task6</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Task7"><span class="nav-number">7.</span> <span class="nav-text">Task7</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Task8"><span class="nav-number">8.</span> <span class="nav-text">Task8</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Task9"><span class="nav-number">9.</span> <span class="nav-text">Task9</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Task10"><span class="nav-number">10.</span> <span class="nav-text">Task10</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Submit-Root-flag"><span class="nav-number">11.</span> <span class="nav-text">Submit Root flag</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">12.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#responder"><span class="nav-number">12.1.</span> <span class="nav-text">responder</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AFtun0%EF%BC%9F"><span class="nav-number">12.1.1.</span> <span class="nav-text">为什么是tun0？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#evil-winrm"><span class="nav-number">12.2.</span> <span class="nav-text">evil-winrm</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="M21in"
+      src="/images/blog_head.jpg#/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">M21in</p>
+  <div class="site-description" itemprop="description">轻舟已过万重山，前路漫漫亦灿灿</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=483937795&auto=1&height=66"></iframe>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">M21in</span>
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+    </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/clipboard-use.js"></script>
